@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ngọc Thanh Yoga</title>
+<title>Yoga cùng Ms. Thanh</title>
 <meta name="description" content="Nguyễn Ngọc Thanh, giáo viên Yoga online cho người mới bắt đầu. Hatha Yoga, Yoga trị liệu, hít thở và thiền.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
@@ -84,7 +84,7 @@ nav .btn{padding:10px 20px}
 @keyframes draw{to{stroke-dashoffset:0}}
 .chipf{position:absolute;padding:10px 16px;border-radius:16px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.8);font-size:13px;box-shadow:0 10px 30px rgba(58,42,53,.08);animation:bob 6s ease-in-out infinite}
 .chipf b{color:var(--rose-d);font-weight:500}
-.chipf.c1{top:8%;left:-4%}.chipf.c2{bottom:14%;right:-6%;animation-delay:-3s}
+.chipf.c1{top:8%;left:-4%}.chipf.c2{bottom:2%;right:-6%;animation-delay:-3s}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
 /* marquee */
@@ -179,6 +179,29 @@ footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);padding:12px 22px;border-radius:99px;background:var(--ink);color:#fff;font-size:14px;transition:.4s;z-index:60}
 .toast.on{transform:translate(-50%,0)}
 
+/* photos */
+.photo{position:absolute;inset:19%;border-radius:50%;overflow:hidden;-webkit-mask-image:radial-gradient(circle,#000 63%,transparent 72%);mask-image:radial-gradient(circle,#000 63%,transparent 72%);transition:transform .3s ease-out;z-index:2}
+.lines{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+.lines path,.lines circle{fill:none;stroke:#fff;stroke-width:1.3;stroke-linecap:round;opacity:.9;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 3.2s ease forwards .5s}
+.lines .rose{stroke:var(--rose-d);opacity:.75}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:center 90%;transform:scale(1.06);animation:zoomin 2.2s cubic-bezier(.2,.8,.2,1)}
+@keyframes zoomin{from{transform:scale(1.25);filter:blur(6px)}}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s}
+.portrait:hover img{transform:scale(1.05)}
+.portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(58,42,53,.45))}
+.portrait .sig{z-index:1}
+.prep-img{height:260px;border-radius:32px;overflow:hidden;margin-bottom:50px}
+.prep-img img{width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.follow{margin:34px auto 14px!important;font-size:13px;letter-spacing:.2em;text-transform:uppercase}
+.social{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.social a{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);transition:.3s}
+.social a:hover{background:var(--rose);transform:translateY(-4px) rotate(-6deg)}
+.social svg{width:22px;height:22px;fill:#fff}
+footer .social{margin-bottom:16px}
+footer .social a{background:var(--glass);border-color:var(--line)}
+footer .social svg{fill:var(--rose-d)}
+footer .social a:hover svg{fill:#fff}
+
 @media (max-width:960px){
   .menu{display:none}
   .hero,.studio,.about,.quiz{grid-template-columns:1fr}
@@ -209,7 +232,7 @@ footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
 <div class="progress" id="prog"></div>
 
 <nav>
-  <a class="logo" href="#">Ngọc Thanh <b>Yoga</b></a>
+  <a class="logo" href="#">Yoga cùng <b>Ms. Thanh</b></a>
   <div class="menu"><a href="#tho">Thở cùng mình</a><a href="#lop">Lớp học</a><a href="#goi-y">Chọn lớp</a><a href="#ve-minh">Về mình</a></div>
   <a class="btn" href="#lien-he">Đăng ký</a>
 </nav>
@@ -229,14 +252,8 @@ footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
   <div class="art" aria-hidden="true">
     <div class="ringo"></div><div class="ringo b"></div>
     <div class="orb"></div>
-    <svg class="lotus" viewBox="0 0 200 200">
-      <path d="M100 150 C70 120 70 80 100 40 C130 80 130 120 100 150Z"/>
-      <path d="M100 150 C60 140 40 105 45 70 C80 80 98 115 100 150Z"/>
-      <path d="M100 150 C140 140 160 105 155 70 C120 80 102 115 100 150Z"/>
-      <path d="M100 150 C55 155 25 135 15 110 C55 105 85 125 100 150Z"/>
-      <path d="M100 150 C145 155 175 135 185 110 C145 105 115 125 100 150Z"/>
-      <path d="M55 165 C80 158 120 158 145 165"/>
-    </svg>
+    <div class="photo" id="parallax"><img src="img/hero.jpg" alt="Ms. Thanh tập yoga" fetchpriority="high"></div>
+    <svg class="lines" id="lines" viewBox="0 0 400 400"><circle cx="200" cy="200" r="138"/><circle class="rose" cx="200" cy="200" r="146" style="stroke-dasharray:2 7;animation:none;stroke-dashoffset:0"/></svg>
     <div class="chipf c1">✿ <b>Hatha</b> · Trị liệu · Thiền</div>
     <div class="chipf c2">Chứng nhận <b>200 giờ</b></div>
   </div>
@@ -292,13 +309,7 @@ footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
 
 <section id="ve-minh"><div class="w about">
   <div class="portrait rv" aria-hidden="true">
-    <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
-      <circle cx="200" cy="170" r="70" fill="rgba(255,255,255,.35)"/>
-      <path d="M200 120c10 0 18 8 18 18s-8 18-18 18-18-8-18-18 8-18 18-18zM200 160c-20 0-32 20-32 46 0 10 4 18 10 22l-50 50c-6 6 0 14 8 12l64-30 64 30c8 2 14-6 8-12l-50-50c6-4 10-12 10-22 0-26-12-46-32-46z" fill="rgba(255,255,255,.75)"/>
-      <path d="M60 420 C140 380 260 380 340 420" stroke="rgba(255,255,255,.6)" stroke-width="1.5" fill="none"/>
-    </svg>
-    <div class="sig">Ngọc Thanh</div>
-  </div>
+    <img src="img/ve-minh.jpg" alt="Ms. Thanh" loading="lazy">  </div>
   <div class="rv">
     <span class="tag">Về mình</span>
     <h2>Chào bạn, mình là <em>Ngọc Thanh.</em></h2>
@@ -314,6 +325,7 @@ footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
 </div></section>
 
 <section style="padding-top:20px"><div class="w">
+  <div class="prep-img rv"><img src="img/chuan-bi.jpg" alt="Thảm tập và bình nước" loading="lazy"></div>
   <div class="rv"><span class="tag">Buổi đầu tiên</span><h2>Bạn chỉ cần <em>bốn thứ.</em></h2></div>
   <div class="steps">
     <div class="step rv">Một tấm thảm tập</div>
@@ -324,7 +336,7 @@ footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
   <div class="faq rv" id="faq">
     <div class="q"><button>Mình chưa từng tập, cơ thể cứng, có học được không?<span>+</span></button><div class="a"><div><p>Được. Lớp dành cho người mới bắt đầu, động tác đi từ dễ đến khó dần.</p></div></div></div>
     <div class="q"><button>Học online thì có được chỉnh tư thế không?<span>+</span></button><div class="a"><div><p>Bạn nhắn Zalo cho mình để hỏi rõ cách lớp diễn ra và cách mình theo dõi tư thế.</p></div></div></div>
-    <div class="q"><button>Lịch học và học phí thế nào?<span>+</span></button><div class="a"><div><p>Bạn nhắn Zalo hoặc gọi cho mình để nhận lịch và học phí mới nhất.</p></div></div></div>
+    <div class="q"><button>Lịch học và học phí thế nào?<span>+</span></button><div class="a"><div><p>Bạn bấm nút Tư vấn lớp học ở cuối trang để nhắn Zalo cho mình, nhận lịch và học phí mới nhất.</p></div></div></div>
   </div>
 </div></section>
 
@@ -334,16 +346,16 @@ footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
     <h2>Hít một hơi thật sâu, <em>rồi nhắn cho mình.</em></h2>
     <p>Mình sẽ gửi bạn lịch học và cách vào lớp.</p>
     <div class="acts">
-      <a class="btn" href="https://zalo.me/0901312993" target="_blank" rel="noopener">Nhắn Zalo 0901 312 993</a>
-      <a class="btn line" href="tel:0901312993">Gọi điện</a>
-      <a class="btn line" href="mailto:ngocthanhnguyen0310@gmail.com">Gửi email</a>
+      <a class="btn line zl" href="https://zalo.me/0901312993" target="_blank" rel="noopener" data-msg="Chào Ms. Thanh, mình muốn được tư vấn lớp học yoga.">Tư vấn lớp học</a>
+      <a class="btn zl" href="https://zalo.me/0901312993" target="_blank" rel="noopener" data-msg="Chào Ms. Thanh, mình muốn đăng ký lớp học yoga.">Đăng ký ngay</a>
     </div>
-    <button class="copy" id="copy">Bấm để chép số điện thoại</button>
+    <p class="follow">Theo dõi Yoga cùng Ms. Thanh</p>
+    <div class="social" id="social"></div>
   </div>
 </div></section>
 
-<footer>© 2026 Nguyễn Ngọc Thanh · Yoga online</footer>
-<div class="toast" id="toast">Đã chép số 0901 312 993</div>
+<footer><div class="social" id="social2"></div>© 2026 Yoga cùng Ms. Thanh · Nguyễn Ngọc Thanh</footer>
+<div class="toast" id="toast">Đã chép sẵn lời nhắn, bạn chỉ cần dán vào Zalo</div>
 
 <script>
 (function(){
@@ -398,9 +410,35 @@ footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
   // faq
   document.querySelectorAll('.q button').forEach(function(b){b.onclick=function(){var q=b.parentNode,on=q.classList.contains('on');document.querySelectorAll('.q').forEach(function(x){x.classList.remove('on')});if(!on)q.classList.add('on')}});
 
-  // copy phone
+  // nét vẽ cánh sen quanh ảnh đầu trang
+  (function(){var s=document.getElementById('lines'),ns='http://www.w3.org/2000/svg',n=16;if(!s)return;for(var i=0;i<n;i++){var a=i/n*Math.PI*2,c=Math.cos(a),si=Math.sin(a);function P(r,o){return (200+r*Math.cos(a+o)).toFixed(1)+' '+(200+r*Math.sin(a+o)).toFixed(1)}var d='M'+P(140,0)+' Q'+P(158,.09)+' '+P(176,0)+' Q'+P(158,-.09)+' '+P(140,0);var p=document.createElementNS(ns,'path');p.setAttribute('d',d);if(i%2)p.setAttribute('class','rose');p.style.animationDelay=(.6+i*.08)+'s';s.appendChild(p)}})();
+
+  // hero photo parallax
+  var ph=document.getElementById('parallax');
+  addEventListener('pointermove',function(e){if(reduce||!ph)return;var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;ph.style.transform='translate('+x*-14+'px,'+y*-14+'px)'});
+
+  // social accounts: điền link vào đây, ô nào để trống sẽ tự ẩn
+  var SOCIAL={
+    facebook:'https://www.facebook.com/share/Z1tEebXnW4cMU6Dx/?mibextid=K35XfP',
+    instagram:'https://www.instagram.com/yogacungmsthanh',
+    tiktok:'https://www.tiktok.com/@coemyoga',
+    threads:'https://www.threads.net/@yogacungmsthanh',
+    youtube:'https://www.youtube.com/@yogacungmsthanh',
+    zalo:'https://zalo.me/g/mfnswi009'
+  };
+  var ICON={
+    facebook:'<path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/>',
+    instagram:'<path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM12 2c-2.7 0-3 0-4.1.1C5 2.2 3 4.2 2.1 7 2 8.1 2 8.4 2 12s0 3.9.1 5c.1 2.9 2.1 4.9 5 5 1.1.1 1.4.1 4.9.1s3.9 0 5-.1c2.9-.1 4.9-2.1 5-5 .1-1.1.1-1.4.1-5s0-3.9-.1-5c-.1-2.9-2.1-4.9-5-5C15.9 2 15.6 2 12 2zm0 1.8c3.5 0 3.8 0 4.9.1 2.2.1 3.1 1.1 3.2 3.2.1 1.1.1 1.4.1 4.9s0 3.8-.1 4.9c-.1 2.1-1 3.1-3.2 3.2-1.1.1-1.4.1-4.9.1s-3.8 0-4.9-.1c-2.2-.1-3.1-1.1-3.2-3.2C3.8 15.8 3.8 15.5 3.8 12s0-3.8.1-4.9C4 5 4.9 4 7.1 3.9 8.2 3.8 8.5 3.8 12 3.8z"/>',
+    tiktok:'<path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.3v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.5a6 6 0 1 0 5.1 5.9V9.1a7.6 7.6 0 0 0 4.5 1.4V7.2a4.4 4.4 0 0 1-3.4-1.4z"/>',
+    threads:'<path d="M16.7 11.1l-.3-.1c-.2-3.1-1.9-4.9-4.8-4.9-1.7 0-3.2.7-4.1 2.1l1.6 1.1c.7-1 1.7-1.3 2.5-1.3 1 0 1.8.3 2.2.9.3.4.6 1 .6 1.7-.9-.2-1.8-.2-2.8-.1-2.8.2-4.6 1.8-4.5 4.1.1 2.2 2.1 3.6 4.4 3.5 1.9-.1 3.4-.9 4.2-2.6.5-.9.8-2.1.9-3.5.8.5 1.4 1.1 1.7 1.9.5 1.3.5 3.4-1.2 5.1-1.5 1.5-3.3 2.1-6 2.1-3 0-5.3-1-6.8-2.9C3.1 16.5 2.4 14.4 2.4 12s.7-4.5 2-6.2C5.9 3.9 8.2 2.9 11.2 2.9s5.4 1 7 2.9c.8.9 1.3 2.1 1.7 3.4l1.9-.5c-.4-1.6-1.1-3-2.1-4.1C17.6 2.2 14.8 1 11.2 1h0C7.6 1 4.9 2.2 3 4.5 1.4 6.6.6 9.2.6 12s.8 5.4 2.4 7.5C4.9 21.8 7.6 23 11.2 23h0c3.2 0 5.4-.8 7.3-2.7 2.4-2.4 2.3-5.4 1.5-7.2-.6-1.3-1.7-2.4-3.3-3zM12 17.1c-1.2.1-2.4-.5-2.5-1.6 0-.8.6-1.7 2.6-1.9h.7c.7 0 1.4.1 2 .2-.2 2.6-1.5 3.2-2.8 3.3z"/>',
+    youtube:'<path d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 0 0 2 8.2 31 31 0 0 0 1.6 12 31 31 0 0 0 2 15.8a3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1c.4-1.2.4-3.8.4-3.8s0-2.6-.4-3.8zM10 15V9l5.2 3L10 15z"/>',
+    zalo:'<path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.6 1.4 4.9 3.6 6.5L5 21l3.4-1.7c1.1.4 2.3.6 3.6.6 5.5 0 10-3.8 10-8.4S17.5 3 12 3zm-3.9 10.9H5.4v-.6l2.1-2.9H5.6v-.9h2.6v.6l-2.1 2.9h2v.9zm2.7 0h-.9V9.5h.9v4.4zm4.1 0h-1.2l-1.5-2.1v2.1h-.9V9.5h.9v2l1.4-2h1.1l-1.6 2.1 1.8 2.3zm3.9-1.6c0 1-.8 1.7-1.7 1.7s-1.7-.8-1.7-1.7.8-1.7 1.7-1.7 1.7.7 1.7 1.7zm-.9 0c0-.5-.4-.9-.8-.9s-.8.4-.8.9.4.9.8.9.8-.4.8-.9z"/>'
+  };
+  ['social','social2'].forEach(function(id){var box=document.getElementById(id);if(!box)return;Object.keys(SOCIAL).forEach(function(k){if(!SOCIAL[k])return;var a=document.createElement('a');a.href=SOCIAL[k];a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',k);a.innerHTML='<svg viewBox="0 0 24 24">'+ICON[k]+'</svg>';box.appendChild(a)})});
+
+  // nút Zalo: chép sẵn lời nhắn rồi mở Zalo
   var t=document.getElementById('toast');
-  document.getElementById('copy').onclick=function(){try{navigator.clipboard.writeText('0901312993')}catch(e){}t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2200)};
+  document.querySelectorAll('.zl').forEach(function(a){a.addEventListener('click',function(){try{navigator.clipboard.writeText(a.dataset.msg)}catch(e){}t.classList.add('on');setTimeout(function(){t.classList.remove('on')},3000)})});
 })();
 </script>
 </body>
