@@ -6,192 +6,402 @@
 <title>Ngọc Thanh Yoga</title>
 <meta name="description" content="Nguyễn Ngọc Thanh, giáo viên Yoga online cho người mới bắt đầu. Hatha Yoga, Yoga trị liệu, hít thở và thiền.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f7f1ec; --paper:#fffaf6; --ink:#3b2d30; --soft:#7a6a6c; --line:#e8dcd4;
-  --rose:#b5838d; --rose-l:#ecd9da; --sage:#8fa28a; --sage-l:#e3e9df;
+  --bg:#fbf6f4; --ink:#3a2a35; --soft:#8a7482; --line:rgba(58,42,53,.12);
+  --rose:#e8a5b8; --rose-d:#c8728d; --lilac:#c9b6e8; --peach:#f6cdb8; --gold:#c9a36a;
+  --glass:rgba(255,255,255,.55);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:"Nunito Sans",sans-serif;font-weight:300;line-height:1.7;font-size:17px}
-a{color:inherit}
-h1,h2,h3,.serif{font-family:"Lora",serif;font-weight:400}
-.w{max-width:760px;margin:0 auto;padding:0 20px}
-.eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:600;margin-bottom:12px}
-section{padding:88px 0}
-h2{font-size:clamp(28px,4.5vw,40px);line-height:1.25;margin-bottom:20px}
+body{background:var(--bg);color:var(--ink);font-family:"Be Vietnam Pro",sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.serif{font-family:"Cormorant Garamond",serif}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--rose-d);font-weight:500}
+.tag::before{content:"";width:28px;height:1px;background:currentColor}
+h2{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(36px,5.4vw,64px);line-height:1.08;margin:14px 0 18px}
+h2 em{color:var(--rose-d)}
+section{position:relative;padding:110px 0}
 
-/* top */
-.top{display:flex;justify-content:space-between;align-items:center;padding:22px 20px;max-width:1080px;margin:0 auto}
-.brand{font-family:"Lora",serif;font-size:20px;text-decoration:none}
-.brand i{color:var(--rose)}
-.cta{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;padding:12px 24px;border-radius:99px;font-size:15px;font-weight:600;transition:.2s}
-.cta:hover{background:var(--rose)}
-.cta.ghost{background:none;color:var(--ink);border:1px solid var(--ink)}
-.cta.ghost:hover{background:var(--ink);color:var(--paper)}
-.top .cta{padding:9px 18px;font-size:14px}
+/* animated aurora background */
+.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.aurora i{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;animation:float 22s ease-in-out infinite}
+.aurora i:nth-child(1){width:46vw;height:46vw;background:var(--rose);top:-12vw;left:-10vw}
+.aurora i:nth-child(2){width:40vw;height:40vw;background:var(--lilac);top:20vh;right:-12vw;animation-delay:-7s}
+.aurora i:nth-child(3){width:34vw;height:34vw;background:var(--peach);bottom:-10vw;left:25vw;animation-delay:-14s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(6vw,4vh) scale(1.1)}66%{transform:translate(-4vw,6vh) scale(.92)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.25;background-image:radial-gradient(rgba(58,42,53,.08) 1px,transparent 1px);background-size:4px 4px}
 
-/* hero with breathing circle */
-.hero{text-align:center;padding:40px 0 96px}
-.breath{position:relative;width:min(340px,78vw);aspect-ratio:1;margin:0 auto 44px;display:grid;place-items:center}
-.ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 40% 35%,var(--rose-l),var(--sage-l) 70%);animation:breathe 10s ease-in-out infinite}
-.ring.r2{inset:-6%;background:none;border:1px solid var(--line);animation-delay:.4s}
-.cue{position:relative;font-family:"Lora",serif;font-style:italic;font-size:22px;color:var(--ink)}
-.cue span{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;animation:fade 10s ease-in-out infinite}
-.cue span:last-child{animation-delay:-5s}
-@keyframes breathe{0%,100%{transform:scale(.72)}50%{transform:scale(1)}}
-@keyframes fade{0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}}
-@media (prefers-reduced-motion:reduce){.ring,.cue span{animation:none}.cue span:last-child{display:none}}
-.hero h1{font-size:clamp(34px,6vw,56px);line-height:1.15;margin-bottom:18px}
-.hero h1 i{color:var(--rose)}
-.hero p{color:var(--soft);max-width:520px;margin:0 auto 32px}
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+/* cursor glow */
+.glow{position:fixed;width:340px;height:340px;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(232,165,184,.35),transparent 65%);transform:translate(-50%,-50%);transition:opacity .3s}
+@media (hover:none){.glow{display:none}}
+
+/* scroll progress */
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--rose-d),var(--lilac),var(--gold));z-index:50;width:0}
+
+/* nav */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:40;width:min(1080px,calc(100% - 24px));display:flex;justify-content:space-between;align-items:center;padding:10px 12px 10px 22px;border-radius:99px;background:var(--glass);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(255,255,255,.7);box-shadow:0 8px 30px rgba(200,114,141,.12)}
+.logo{font-family:"Cormorant Garamond",serif;font-size:24px;font-style:italic}
+.logo b{font-weight:500;font-style:normal;color:var(--rose-d)}
+.menu{display:flex;gap:26px;font-size:14px}
+.menu a{position:relative}
+.menu a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--rose-d);transition:.35s}
+.menu a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:99px;font-size:14px;font-weight:500;background:linear-gradient(120deg,var(--rose-d),#b27bd0);color:#fff;box-shadow:0 10px 30px rgba(200,114,141,.35);transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;cursor:pointer;border:0;font-family:inherit}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);transform:translateX(-100%);transition:.7s}
+.btn:hover::after{transform:translateX(100%)}
+.btn:hover{box-shadow:0 14px 40px rgba(200,114,141,.45)}
+.btn.line{background:var(--glass);color:var(--ink);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(10px)}
+nav .btn{padding:10px 20px}
+
+/* hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:40px;padding-top:120px}
+.hero h1{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(52px,8vw,108px);line-height:.98;letter-spacing:-.01em;margin:20px 0 26px}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln span{display:inline-block;transform:translateY(110%);animation:rise 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 .ln:nth-child(2) span{animation-delay:.15s}
+.hero h1 .ln:nth-child(3) span{animation-delay:.3s}
+@keyframes rise{to{transform:none}}
+.hero h1 em{font-style:italic;background:linear-gradient(100deg,var(--rose-d),#a17ad6 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:17px;color:var(--soft);max-width:460px;margin-bottom:34px}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:flex;gap:34px;margin-top:48px}
+.stats div b{display:block;font-family:"Cormorant Garamond",serif;font-weight:500;font-size:40px;line-height:1;color:var(--ink)}
+.stats div span{font-size:13px;color:var(--soft)}
+
+/* hero art: orbiting rings + lotus svg */
+.art{position:relative;aspect-ratio:1;max-width:500px;justify-self:center;width:100%}
+.orb{position:absolute;inset:12%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#f8d9e2 40%,#d9c6f0 80%);box-shadow:inset -20px -30px 60px rgba(161,122,214,.25),0 40px 80px rgba(200,114,141,.25);animation:pulse 8s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(.96)}50%{transform:scale(1.03)}}
+.ringo{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(200,114,141,.3);animation:spin 40s linear infinite}
+.ringo.b{inset:5%;border-style:dashed;border-color:rgba(161,122,214,.35);animation-duration:60s;animation-direction:reverse}
+.ringo::before{content:"";position:absolute;top:-6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 16px var(--gold)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lotus{position:absolute;inset:26%;width:48%;height:48%;}
+.lotus path{fill:none;stroke:var(--rose-d);stroke-width:1.4;stroke-dasharray:600;stroke-dashoffset:600;animation:draw 3s ease forwards .4s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.chipf{position:absolute;padding:10px 16px;border-radius:16px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.8);font-size:13px;box-shadow:0 10px 30px rgba(58,42,53,.08);animation:bob 6s ease-in-out infinite}
+.chipf b{color:var(--rose-d);font-weight:500}
+.chipf.c1{top:8%;left:-4%}.chipf.c2{bottom:14%;right:-6%;animation-delay:-3s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* marquee */
+.marq{padding:26px 0;border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;background:rgba(255,255,255,.35);backdrop-filter:blur(6px)}
+.marq div{display:inline-block;animation:mq 30s linear infinite;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:30px;color:var(--soft)}
+.marq span{margin:0 26px;color:var(--rose)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.8,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+/* breathing studio */
+.studio{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.bw{position:relative;aspect-ratio:1;max-width:420px;width:100%;justify-self:center;display:grid;place-items:center}
+.bw .halo{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,var(--rose),var(--lilac),var(--peach),var(--rose));filter:blur(30px);opacity:.5;animation:spin 20s linear infinite}
+.bw .core{position:relative;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#fbe3ea 55%,#e7d9f6);box-shadow:0 30px 60px rgba(200,114,141,.25);display:grid;place-items:center;text-align:center;transition:transform 4s cubic-bezier(.45,0,.55,1);transform:scale(.7)}
+.bw .core b{display:block;font-family:"Cormorant Garamond",serif;font-weight:500;font-size:clamp(26px,3.4vw,36px);font-style:italic}
+.bw .core span{font-size:44px;font-family:"Cormorant Garamond",serif;color:var(--rose-d);line-height:1}
+.bw svg{position:absolute;inset:-2%;width:104%;height:104%;transform:rotate(-90deg)}
+.bw svg circle{fill:none;stroke:var(--rose-d);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:1257;stroke-dashoffset:1257}
+.modes{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 26px}
+.mode{padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--glass);font-size:13px;cursor:pointer;font-family:inherit;color:var(--ink);transition:.25s}
+.mode.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cycles{font-size:13px;color:var(--soft);margin-top:14px}
+
+/* classes: tilt cards */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px;perspective:1000px}
+.card{position:relative;padding:30px 24px 28px;border-radius:28px;background:var(--glass);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8);box-shadow:0 20px 50px rgba(58,42,53,.07);transform-style:preserve-3d;transition:transform .2s ease-out,box-shadow .3s;min-height:320px;display:flex;flex-direction:column;overflow:hidden}
+.card:hover{box-shadow:0 30px 70px rgba(200,114,141,.2)}
+.card .ic{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;margin-bottom:auto;transform:translateZ(40px)}
+.card .ic svg{width:34px;height:34px;stroke:#fff;fill:none;stroke-width:1.4}
+.card h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:30px;line-height:1.1;margin:26px 0 8px;transform:translateZ(30px)}
+.card p{font-size:14px;color:var(--soft);transform:translateZ(20px)}
+.card .sh{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.7),transparent 45%);opacity:0;transition:opacity .3s}
+.card:hover .sh{opacity:1}
+
+/* quiz */
+.quiz{border-radius:36px;padding:56px;background:linear-gradient(135deg,rgba(255,255,255,.7),rgba(255,255,255,.35));backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.8);box-shadow:0 30px 80px rgba(161,122,214,.15);display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.6);cursor:pointer;font-family:inherit;font-size:15px;color:var(--ink);text-align:left;transition:.25s}
+.opt:hover{border-color:var(--rose);transform:translateX(6px)}
+.opt.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.opt i{font-style:normal;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--bg);color:var(--rose-d);font-size:13px;flex:none}
+.result{min-height:250px;border-radius:26px;padding:32px;background:linear-gradient(140deg,#fbe3ea,#ece2fa);position:relative;overflow:hidden}
+.result h4{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:38px;line-height:1.1;margin:10px 0}
+.result p{color:var(--soft);font-size:15px;margin-bottom:22px}
+.result .fade{animation:fin .6s ease}
+@keyframes fin{from{opacity:0;transform:translateY(12px)}}
 
 /* about */
-.about{background:var(--paper)}
-.about-grid{display:grid;grid-template-columns:150px 1fr;gap:36px;align-items:start}
-.avatar{width:150px;height:150px;border-radius:50%;background:var(--sage-l);display:grid;place-items:center;font-family:"Lora",serif;font-size:48px;color:var(--sage)}
-.about p{margin-bottom:14px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.chip{font-size:14px;padding:6px 14px;border-radius:99px;background:var(--bg);border:1px solid var(--line)}
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}
+.portrait{position:relative;aspect-ratio:4/5;border-radius:240px 240px 32px 32px;overflow:hidden;background:linear-gradient(160deg,#f7d3de,#d8c8f2 70%,#f6dcc8)}
+.portrait svg{position:absolute;inset:0;width:100%;height:100%}
+.portrait .sig{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:30px;color:#fff;text-shadow:0 2px 20px rgba(58,42,53,.3)}
+.about p{color:var(--soft);margin-bottom:16px;max-width:520px}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.cred{padding:18px 20px;border-radius:20px;background:var(--glass);border:1px solid rgba(255,255,255,.8);backdrop-filter:blur(10px)}
+.cred b{display:block;font-family:"Cormorant Garamond",serif;font-weight:500;font-size:22px}
+.cred span{font-size:13px;color:var(--soft)}
 
-/* classes */
-.classes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
-.cls{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px}
-.cls .dot{width:38px;height:38px;border-radius:50%;margin-bottom:16px}
-.cls h3{font-size:21px;margin-bottom:6px}
-.cls p{font-size:15px;color:var(--soft)}
-
-/* for whom */
-.fit{background:var(--sage-l)}
-.fit ul{list-style:none;margin-top:24px}
-.fit li{padding:14px 0 14px 34px;border-bottom:1px solid #cfd8ca;position:relative}
-.fit li::before{content:"";position:absolute;left:4px;top:24px;width:12px;height:12px;border-radius:50%;border:2px solid var(--sage)}
-
-/* prepare */
-.prep{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px;text-align:center}
-.prep div{font-size:15px}
-.prep b{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 10px;border-radius:50%;background:var(--paper);border:1px solid var(--line);font-family:"Lora",serif;font-weight:400;font-size:22px;color:var(--rose)}
+/* prepare: horizontal steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px;counter-reset:s}
+.step{padding:26px;border-radius:24px;border:1px solid var(--line);position:relative;transition:.3s;background:rgba(255,255,255,.3)}
+.step:hover{background:#fff;transform:translateY(-6px)}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:"Cormorant Garamond",serif;font-size:46px;color:var(--rose);line-height:1;display:block;margin-bottom:14px}
 
 /* faq */
-details{border-bottom:1px solid var(--line);padding:18px 0}
-summary{cursor:pointer;font-family:"Lora",serif;font-size:19px;list-style:none;display:flex;justify-content:space-between;gap:16px}
-summary::after{content:"+";color:var(--rose)}
-details[open] summary::after{content:"–"}
-details p{color:var(--soft);margin-top:10px}
+.faq{max-width:780px;margin:40px auto 0}
+.q{border-bottom:1px solid var(--line)}
+.q button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;background:none;border:0;font-family:"Cormorant Garamond",serif;font-size:24px;color:var(--ink);cursor:pointer;text-align:left}
+.q button span{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none;transition:.35s;font-family:"Be Vietnam Pro";font-size:18px;color:var(--rose-d)}
+.q.on button span{transform:rotate(45deg);background:var(--ink);color:#fff}
+.q .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.q.on .a{grid-template-rows:1fr}
+.q .a>div{overflow:hidden;color:var(--soft)}
+.q .a p{padding-bottom:22px}
 
 /* contact */
-.contact{background:var(--ink);color:var(--paper);text-align:center}
-.contact h2{color:var(--paper)}
-.contact p{color:#cbbcbc;margin-bottom:30px}
-.contact .cta{background:var(--rose);color:#fff}
-.contact .cta:hover{background:var(--paper);color:var(--ink)}
-.contact .cta.ghost{background:none;border-color:#8a7779;color:var(--paper)}
-.links{margin-top:28px;font-size:15px;color:#cbbcbc}
-.links a{text-decoration:none;border-bottom:1px solid #6d5b5e}
-footer{text-align:center;font-size:13px;color:var(--soft);padding:24px}
+.contact{text-align:center;border-radius:44px;padding:90px 28px;background:linear-gradient(135deg,#3a2a35,#5b3f58 60%,#7a4f6e);color:#fff;position:relative;overflow:hidden}
+.contact::before,.contact::after{content:"";position:absolute;border-radius:50%;filter:blur(60px);opacity:.5}
+.contact::before{width:340px;height:340px;background:var(--rose-d);top:-120px;left:-80px}
+.contact::after{width:300px;height:300px;background:#a17ad6;bottom:-120px;right:-60px}
+.contact>*{position:relative;z-index:1}
+.contact h2{color:#fff}
+.contact h2 em{color:var(--rose)}
+.contact p{color:rgba(255,255,255,.7);max-width:460px;margin:0 auto 34px}
+.contact .acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.contact .btn.line{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
+.copy{margin-top:26px;font-size:14px;color:rgba(255,255,255,.7);cursor:pointer;background:none;border:0;font-family:inherit;border-bottom:1px dashed rgba(255,255,255,.4)}
+footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);padding:12px 22px;border-radius:99px;background:var(--ink);color:#fff;font-size:14px;transition:.4s;z-index:60}
+.toast.on{transform:translate(-50%,0)}
 
-@media (max-width:640px){
-  body{font-size:16px}
-  section{padding:64px 0}
-  .about-grid{grid-template-columns:1fr;gap:20px}
-  .avatar{width:110px;height:110px;font-size:36px}
-  .classes{grid-template-columns:1fr}
-  .prep{grid-template-columns:1fr 1fr;row-gap:24px}
+@media (max-width:960px){
+  .menu{display:none}
+  .hero,.studio,.about,.quiz{grid-template-columns:1fr}
+  .hero{padding-top:110px;gap:10px}
+  .art{max-width:380px;order:-1}
+  .cards,.steps{grid-template-columns:1fr 1fr}
+  .quiz{padding:32px 22px}
+  .about{gap:40px}
+  .portrait{max-width:380px;justify-self:center;width:100%}
 }
+@media (max-width:560px){
+  section{padding:76px 0}
+  .w{padding:0 16px}
+  .cards,.steps,.creds{grid-template-columns:1fr}
+  .card{min-height:0}
+  .stats{gap:22px}
+  .chipf.c1{left:0}.chipf.c2{right:0}
+  .contact{border-radius:30px;padding:64px 20px}
+  nav .btn{padding:9px 14px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.hero h1 .ln span{transform:none}.lotus path{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
+<div class="aurora"><i></i><i></i><i></i></div>
+<div class="grain"></div>
+<div class="glow" id="glow"></div>
+<div class="progress" id="prog"></div>
 
-<header class="top">
-  <a class="brand" href="#">Ngọc Thanh <i>Yoga</i></a>
-  <a class="cta" href="#lien-he">Đăng ký học</a>
+<nav>
+  <a class="logo" href="#">Ngọc Thanh <b>Yoga</b></a>
+  <div class="menu"><a href="#tho">Thở cùng mình</a><a href="#lop">Lớp học</a><a href="#goi-y">Chọn lớp</a><a href="#ve-minh">Về mình</a></div>
+  <a class="btn" href="#lien-he">Đăng ký</a>
+</nav>
+
+<header class="w hero">
+  <div>
+    <span class="tag">Yoga online · TP. Hồ Chí Minh</span>
+    <h1><span class="ln"><span>Mềm mại</span></span><span class="ln"><span>từ <em>hơi thở,</em></span></span><span class="ln"><span>vững vàng từ bên trong.</span></span></h1>
+    <p class="lead">Mình là Ngọc Thanh, giáo viên Yoga online cho người mới bắt đầu. Tập nhẹ nhàng tại nhà, mỗi động tác đều có người hướng dẫn.</p>
+    <div class="acts"><a class="btn" href="#tho">Thử thở cùng mình ↓</a><a class="btn line" href="#lop">Xem lớp học</a></div>
+    <div class="stats">
+      <div><b data-count="200">0</b><span>giờ đào tạo</span></div>
+      <div><b data-count="2">0</b><span>năm dạy online</span></div>
+      <div><b data-count="4">0</b><span>phương pháp</span></div>
+    </div>
+  </div>
+  <div class="art" aria-hidden="true">
+    <div class="ringo"></div><div class="ringo b"></div>
+    <div class="orb"></div>
+    <svg class="lotus" viewBox="0 0 200 200">
+      <path d="M100 150 C70 120 70 80 100 40 C130 80 130 120 100 150Z"/>
+      <path d="M100 150 C60 140 40 105 45 70 C80 80 98 115 100 150Z"/>
+      <path d="M100 150 C140 140 160 105 155 70 C120 80 102 115 100 150Z"/>
+      <path d="M100 150 C55 155 25 135 15 110 C55 105 85 125 100 150Z"/>
+      <path d="M100 150 C145 155 175 135 185 110 C145 105 115 125 100 150Z"/>
+      <path d="M55 165 C80 158 120 158 145 165"/>
+    </svg>
+    <div class="chipf c1">✿ <b>Hatha</b> · Trị liệu · Thiền</div>
+    <div class="chipf c2">Chứng nhận <b>200 giờ</b></div>
+  </div>
 </header>
 
-<section class="hero"><div class="w">
-  <div class="breath" aria-hidden="true">
-    <div class="ring r2"></div><div class="ring"></div>
-    <div class="cue"><span>hít vào</span><span>thở ra</span></div>
+<div class="marq"><div>Hít vào <span>✦</span> Thở ra <span>✦</span> Thả lỏng <span>✦</span> Cân bằng <span>✦</span> Hiện diện <span>✦</span> Hít vào <span>✦</span> Thở ra <span>✦</span> Thả lỏng <span>✦</span> Cân bằng <span>✦</span> Hiện diện <span>✦</span>&nbsp;</div></div>
+
+<section id="tho"><div class="w studio">
+  <div class="bw rv">
+    <div class="halo"></div>
+    <svg viewBox="0 0 420 420"><circle id="arc" cx="210" cy="210" r="200"/></svg>
+    <div class="core" id="core"><div><b id="phase">Sẵn sàng</b><span id="num">·</span></div></div>
   </div>
-  <p class="eyebrow">Yoga online cho người mới bắt đầu</p>
-  <h1>Bắt đầu từ <i>một hơi thở</i>, ngay tại nhà bạn.</h1>
-  <p>Mình là Ngọc Thanh, giáo viên Yoga online tại TP.HCM. Mình hướng dẫn người mới tập chậm, tập đúng và tập đều.</p>
-  <div class="btns">
-    <a class="cta" href="#lien-he">Nhắn Zalo cho mình</a>
-    <a class="cta ghost" href="#lop-hoc">Xem các lớp</a>
+  <div class="rv">
+    <span class="tag">Thở cùng mình</span>
+    <h2>Một phút <em>dành cho bạn.</em></h2>
+    <p style="color:var(--soft);max-width:440px">Chọn một nhịp thở rồi bấm bắt đầu. Nhìn vòng tròn nở ra khi hít vào, thu lại khi thở ra.</p>
+    <div class="modes" id="modes">
+      <button class="mode on" data-p="4,4,4,4">Thở hộp 4-4-4-4</button>
+      <button class="mode" data-p="4,0,6,0">Thư giãn 4-6</button>
+      <button class="mode" data-p="4,7,8,0">Dễ ngủ 4-7-8</button>
+    </div>
+    <button class="btn" id="go">Bắt đầu thở</button>
+    <p class="cycles" id="cyc">Bạn đã hoàn thành 0 vòng thở.</p>
   </div>
 </div></section>
 
-<section class="about" id="ve-minh"><div class="w">
-  <div class="about-grid">
-    <div class="avatar" aria-hidden="true">NT</div>
+<section id="lop"><div class="w">
+  <div class="rv" style="text-align:center"><span class="tag">Lớp học</span><h2>Bốn cách để <em>cơ thể nhẹ nhõm.</em></h2></div>
+  <div class="cards">
+    <div class="card rv"><div class="sh"></div><div class="ic" style="background:linear-gradient(135deg,#e8a5b8,#c8728d)"><svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M12 7v6m0 0-4 7m4-7 4 7M5 10h14"/></svg></div><h3>Hatha Yoga</h3><p>Tư thế nền tảng, tập chậm, chú ý tư thế đúng và nhịp thở.</p></div>
+    <div class="card rv"><div class="sh"></div><div class="ic" style="background:linear-gradient(135deg,#c9b6e8,#a17ad6)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div><h3>Yoga trị liệu</h3><p>Bài tập nhẹ giúp thả lỏng lưng, cổ và vai hay bị mỏi.</p></div>
+    <div class="card rv"><div class="sh"></div><div class="ic" style="background:linear-gradient(135deg,#f6cdb8,#e39a7c)"><svg viewBox="0 0 24 24"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h8"/></svg></div><h3>Hít thở</h3><p>Tập thở sâu và đều, dùng được cả khi đang làm việc.</p></div>
+    <div class="card rv"><div class="sh"></div><div class="ic" style="background:linear-gradient(135deg,#e6c99a,#c9a36a)"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.5"/><path d="M4 18c3-1 5-4 8-4s5 3 8 4M7 21h10"/></svg></div><h3>Thiền</h3><p>Vài phút ngồi yên mỗi ngày, dễ tập, không cần dụng cụ.</p></div>
+  </div>
+</div></section>
+
+<section id="goi-y"><div class="w">
+  <div class="quiz rv">
     <div>
-      <p class="eyebrow">Về mình</p>
-      <h2>Chào bạn, mình là Ngọc Thanh.</h2>
-      <p>Mình đã dạy lớp yoga online cho người mới được 2 năm. Học viên của mình phần lớn chưa từng tập, nhiều người ngồi làm việc cả ngày.</p>
-      <p>Mình tin yoga không đòi hỏi bạn phải dẻo. Bạn chỉ cần bắt đầu từ đúng chỗ cơ thể mình đang đứng.</p>
-      <div class="chips">
-        <span class="chip">Chứng nhận 200 giờ</span>
-        <span class="chip">Thân Khí Thiền</span>
-        <span class="chip">2 năm dạy online</span>
-        <span class="chip">TP. Hồ Chí Minh</span>
+      <span class="tag">Gợi ý cho bạn</span>
+      <h2>Hôm nay bạn <em>cần gì nhất?</em></h2>
+      <div class="opts" id="opts">
+        <button class="opt" data-k="0"><i>01</i>Mình chưa tập bao giờ</button>
+        <button class="opt" data-k="1"><i>02</i>Lưng, cổ, vai hay mỏi</button>
+        <button class="opt" data-k="2"><i>03</i>Hay căng thẳng, khó ngủ</button>
+        <button class="opt" data-k="3"><i>04</i>Muốn tâm trí yên hơn</button>
       </div>
+    </div>
+    <div class="result" id="res"><div class="fade"><span class="tag">Kết quả</span><h4>Chọn một ô bên cạnh nhé.</h4><p>Mình sẽ gợi ý lớp hợp với bạn nhất.</p></div></div>
+  </div>
+</div></section>
+
+<section id="ve-minh"><div class="w about">
+  <div class="portrait rv" aria-hidden="true">
+    <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+      <circle cx="200" cy="170" r="70" fill="rgba(255,255,255,.35)"/>
+      <path d="M200 120c10 0 18 8 18 18s-8 18-18 18-18-8-18-18 8-18 18-18zM200 160c-20 0-32 20-32 46 0 10 4 18 10 22l-50 50c-6 6 0 14 8 12l64-30 64 30c8 2 14-6 8-12l-50-50c6-4 10-12 10-22 0-26-12-46-32-46z" fill="rgba(255,255,255,.75)"/>
+      <path d="M60 420 C140 380 260 380 340 420" stroke="rgba(255,255,255,.6)" stroke-width="1.5" fill="none"/>
+    </svg>
+    <div class="sig">Ngọc Thanh</div>
+  </div>
+  <div class="rv">
+    <span class="tag">Về mình</span>
+    <h2>Chào bạn, mình là <em>Ngọc Thanh.</em></h2>
+    <p>Mình dạy lớp yoga online cho người mới đã 2 năm. Mình tin yoga không đòi hỏi bạn phải dẻo, chỉ cần bắt đầu từ đúng chỗ cơ thể mình đang đứng.</p>
+    <p>Lớp của mình tập chậm, chú trọng hơi thở và tư thế đúng, để bạn tập đều mà không quá sức.</p>
+    <div class="creds">
+      <div class="cred"><b>200 giờ</b><span>Chứng nhận đào tạo</span></div>
+      <div class="cred"><b>Thân Khí Thiền</b><span>Nơi đào tạo</span></div>
+      <div class="cred"><b>2 năm</b><span>Dạy lớp online</span></div>
+      <div class="cred"><b>Người mới</b><span>Đối tượng chính</span></div>
     </div>
   </div>
 </div></section>
 
-<section id="lop-hoc"><div class="w">
-  <p class="eyebrow">Mình hướng dẫn</p>
-  <h2>Bốn cách để cơ thể nhẹ nhõm hơn.</h2>
-  <div class="classes">
-    <div class="cls"><div class="dot" style="background:var(--rose-l)"></div><h3>Hatha Yoga</h3><p>Các tư thế nền tảng, tập chậm, chú ý tư thế đúng và nhịp thở.</p></div>
-    <div class="cls"><div class="dot" style="background:var(--sage-l)"></div><h3>Yoga trị liệu</h3><p>Bài tập nhẹ, giúp thả lỏng vùng lưng, cổ và vai hay bị mỏi.</p></div>
-    <div class="cls"><div class="dot" style="background:var(--sage-l)"></div><h3>Hướng dẫn hít thở</h3><p>Tập thở sâu và đều, dùng được cả khi đang làm việc.</p></div>
-    <div class="cls"><div class="dot" style="background:var(--rose-l)"></div><h3>Thiền</h3><p>Vài phút ngồi yên mỗi ngày, dễ tập, không cần dụng cụ.</p></div>
+<section style="padding-top:20px"><div class="w">
+  <div class="rv"><span class="tag">Buổi đầu tiên</span><h2>Bạn chỉ cần <em>bốn thứ.</em></h2></div>
+  <div class="steps">
+    <div class="step rv">Một tấm thảm tập</div>
+    <div class="step rv">Một góc nhà yên tĩnh</div>
+    <div class="step rv">Quần áo thoải mái</div>
+    <div class="step rv">Điện thoại hoặc máy tính có mạng</div>
+  </div>
+  <div class="faq rv" id="faq">
+    <div class="q"><button>Mình chưa từng tập, cơ thể cứng, có học được không?<span>+</span></button><div class="a"><div><p>Được. Lớp dành cho người mới bắt đầu, động tác đi từ dễ đến khó dần.</p></div></div></div>
+    <div class="q"><button>Học online thì có được chỉnh tư thế không?<span>+</span></button><div class="a"><div><p>Bạn nhắn Zalo cho mình để hỏi rõ cách lớp diễn ra và cách mình theo dõi tư thế.</p></div></div></div>
+    <div class="q"><button>Lịch học và học phí thế nào?<span>+</span></button><div class="a"><div><p>Bạn nhắn Zalo hoặc gọi cho mình để nhận lịch và học phí mới nhất.</p></div></div></div>
   </div>
 </div></section>
 
-<section class="fit"><div class="w">
-  <p class="eyebrow" style="color:var(--sage)">Lớp hợp với bạn nếu</p>
-  <h2>Bạn đang ở đâu cũng bắt đầu được.</h2>
-  <ul>
-    <li>Bạn chưa từng tập yoga và muốn được hướng dẫn từ đầu.</li>
-    <li>Bạn ngồi nhiều, hay mỏi lưng, cổ, vai.</li>
-    <li>Bạn muốn tập tại nhà, không phải đi lại.</li>
-    <li>Bạn cần vài phút yên tĩnh để thở và nghỉ.</li>
-  </ul>
-</div></section>
-
-<section><div class="w">
-  <p class="eyebrow">Chuẩn bị cho buổi đầu</p>
-  <h2>Bạn chỉ cần bốn thứ.</h2>
-  <div class="prep">
-    <div><b>1</b>Một tấm thảm</div>
-    <div><b>2</b>Góc nhà yên tĩnh</div>
-    <div><b>3</b>Quần áo thoải mái</div>
-    <div><b>4</b>Điện thoại hoặc máy tính có mạng</div>
+<section id="lien-he" style="padding-top:20px"><div class="w">
+  <div class="contact rv">
+    <span class="tag" style="color:var(--rose)">Liên hệ</span>
+    <h2>Hít một hơi thật sâu, <em>rồi nhắn cho mình.</em></h2>
+    <p>Mình sẽ gửi bạn lịch học và cách vào lớp.</p>
+    <div class="acts">
+      <a class="btn" href="https://zalo.me/0901312993" target="_blank" rel="noopener">Nhắn Zalo 0901 312 993</a>
+      <a class="btn line" href="tel:0901312993">Gọi điện</a>
+      <a class="btn line" href="mailto:ngocthanhnguyen0310@gmail.com">Gửi email</a>
+    </div>
+    <button class="copy" id="copy">Bấm để chép số điện thoại</button>
   </div>
-</div></section>
-
-<section style="padding-top:0"><div class="w">
-  <p class="eyebrow">Câu hỏi thường gặp</p>
-  <details><summary>Mình chưa từng tập, cơ thể cứng, có học được không?</summary><p>Được. Lớp dành cho người mới bắt đầu, các động tác đi từ dễ đến khó dần.</p></details>
-  <details><summary>Học online thì có được chỉnh tư thế không?</summary><p>Bạn nhắn Zalo cho mình để hỏi rõ cách lớp diễn ra và cách mình theo dõi tư thế.</p></details>
-  <details><summary>Lịch học và học phí thế nào?</summary><p>Bạn nhắn Zalo hoặc gọi cho mình để nhận lịch và học phí mới nhất.</p></details>
-</div></section>
-
-<section class="contact" id="lien-he"><div class="w">
-  <p class="eyebrow" style="color:var(--rose-l)">Liên hệ</p>
-  <h2>Hít một hơi thật sâu, rồi nhắn cho mình.</h2>
-  <p>Mình sẽ gửi bạn lịch học và cách vào lớp.</p>
-  <div class="btns">
-    <a class="cta" href="https://zalo.me/0901312993" target="_blank" rel="noopener">Zalo 0901 312 993</a>
-    <a class="cta ghost" href="tel:0901312993">Gọi điện</a>
-  </div>
-  <p class="links">hoặc email <a href="mailto:ngocthanhnguyen0310@gmail.com">ngocthanhnguyen0310@gmail.com</a></p>
 </div></section>
 
 <footer>© 2026 Nguyễn Ngọc Thanh · Yoga online</footer>
+<div class="toast" id="toast">Đã chép số 0901 312 993</div>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // cursor glow + progress
+  var glow=document.getElementById('glow'),prog=document.getElementById('prog');
+  addEventListener('pointermove',function(e){glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+  addEventListener('scroll',function(){var h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+
+  // reveal on scroll
+  var io=new IntersectionObserver(function(es){es.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('on')},(e.target.dataset.d||0));io.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){var sib=[].slice.call(el.parentNode.children).filter(function(x){return x.classList.contains('rv')});el.dataset.d=sib.indexOf(el)*120;io.observe(el)});
+
+  // count up
+  document.querySelectorAll('[data-count]').forEach(function(el){var t=+el.dataset.count,s=null;function f(ts){if(!s)s=ts;var p=Math.min((ts-s)/1600,1);el.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}setTimeout(function(){requestAnimationFrame(f)},600)});
+
+  // tilt cards
+  document.querySelectorAll('.card').forEach(function(c){
+    c.addEventListener('pointermove',function(e){if(reduce)return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;c.style.transform='rotateY('+((x-.5)*14)+'deg) rotateX('+((.5-y)*14)+'deg)';c.style.setProperty('--mx',x*100+'%');c.style.setProperty('--my',y*100+'%')});
+    c.addEventListener('pointerleave',function(){c.style.transform=''});
+  });
+
+  // breathing studio
+  var core=document.getElementById('core'),ph=document.getElementById('phase'),num=document.getElementById('num'),arc=document.getElementById('arc'),go=document.getElementById('go'),cyc=document.getElementById('cyc');
+  var pat=[4,4,4,4],run=false,timer=null,count=0,L=1257;
+  document.querySelectorAll('.mode').forEach(function(b){b.onclick=function(){document.querySelectorAll('.mode').forEach(function(x){x.classList.remove('on')});b.classList.add('on');pat=b.dataset.p.split(',').map(Number);if(run)stop()}});
+  var names=['Hít vào','Giữ hơi','Thở ra','Nghỉ'],scales=[1,1,.7,.7];
+  function stop(){run=false;clearTimeout(timer);clearInterval(window._tick);go.textContent='Bắt đầu thở';ph.textContent='Sẵn sàng';num.textContent='·';core.style.transitionDuration='1.2s';core.style.transform='scale(.7)';arc.style.transition='stroke-dashoffset .6s';arc.style.strokeDashoffset=L}
+  function step(i){
+    if(!run)return;
+    if(i>3){count++;cyc.textContent='Bạn đã hoàn thành '+count+' vòng thở.';i=0}
+    var d=pat[i];if(!d){return step(i+1)}
+    ph.textContent=names[i];core.style.transitionDuration=d+'s';core.style.transform='scale('+scales[i]+')';
+    var total=pat.reduce(function(a,b){return a+b},0),before=pat.slice(0,i).reduce(function(a,b){return a+b},0);
+    arc.style.transition='stroke-dashoffset '+d+'s linear';arc.style.strokeDashoffset=L-L*(before+d)/total;
+    var left=d;num.textContent=left;clearInterval(window._tick);
+    window._tick=setInterval(function(){left--;if(left>0)num.textContent=left},1000);
+    timer=setTimeout(function(){if(i===3||(i===2&&!pat[3])){arc.style.transition='none';arc.style.strokeDashoffset=L;arc.getBoundingClientRect()}step(i+1)},d*1000);
+  }
+  go.onclick=function(){if(run){stop();return}run=true;go.textContent='Dừng lại';arc.style.transition='none';arc.style.strokeDashoffset=L;step(0)};
+
+  // quiz
+  var R=[
+    ['Hatha Yoga','Bắt đầu với các tư thế nền tảng, tập chậm và đúng. Đây là lớp hợp nhất cho người mới.'],
+    ['Yoga trị liệu','Những bài tập nhẹ giúp thả lỏng vùng lưng, cổ, vai sau giờ ngồi lâu.'],
+    ['Hướng dẫn hít thở','Học cách thở sâu và đều để thả lỏng. Bạn có thể thử ngay nhịp 4-7-8 ở phía trên.'],
+    ['Thiền','Vài phút ngồi yên mỗi ngày để tâm trí lắng lại, không cần dụng cụ.']
+  ];
+  var res=document.getElementById('res');
+  document.querySelectorAll('.opt').forEach(function(o){o.onclick=function(){document.querySelectorAll('.opt').forEach(function(x){x.classList.remove('on')});o.classList.add('on');var r=R[o.dataset.k];res.innerHTML='<div class="fade"><span class="tag">Gợi ý cho bạn</span><h4>'+r[0]+'</h4><p>'+r[1]+'</p><a class="btn" href="https://zalo.me/0901312993" target="_blank" rel="noopener">Hỏi mình về lớp này</a></div>'}});
+
+  // faq
+  document.querySelectorAll('.q button').forEach(function(b){b.onclick=function(){var q=b.parentNode,on=q.classList.contains('on');document.querySelectorAll('.q').forEach(function(x){x.classList.remove('on')});if(!on)q.classList.add('on')}});
+
+  // copy phone
+  var t=document.getElementById('toast');
+  document.getElementById('copy').onclick=function(){try{navigator.clipboard.writeText('0901312993')}catch(e){}t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2200)};
+})();
+</script>
 </body>
 </html>
