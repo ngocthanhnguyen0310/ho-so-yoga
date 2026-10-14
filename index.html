@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ngọc Thanh — Yoga Online</title>
+<meta name="description" content="Nguyễn Ngọc Thanh, giáo viên Yoga online cho người mới bắt đầu. Hatha Yoga, Yoga trị liệu, hít thở và thiền.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3eee6; --ink:#2b2a26; --muted:#8b877d; --line:#d9d2c5;
+  --sage:#6f8467; --sage-d:#4f6249; --sun:#e9b949; --clay:#c97b5a; --card:#ebe4d8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Be Vietnam Pro",sans-serif;font-weight:300;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.serif{font-family:"Playfair Display",serif}
+.mono{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.num{font-size:13px;color:var(--muted);margin-bottom:20px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:"Playfair Display",serif;font-size:24px}
+.logo span{color:var(--sage)}
+.links{display:flex;gap:28px;align-items:center;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.btn{border:1px solid var(--ink);border-radius:99px;padding:8px 16px}
+.btn:hover{background:var(--ink);color:var(--bg)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;min-height:calc(100vh - 68px)}
+.hero-l{padding:40px 24px 48px max(24px,calc((100vw - 1180px)/2 + 24px));display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.hero-top{display:flex;justify-content:space-between}
+h1{font-family:"Playfair Display",serif;font-weight:500;font-size:clamp(46px,7vw,104px);line-height:1;letter-spacing:-.02em}
+h1 em{color:var(--muted)}
+h1 .in{display:block;padding-left:12%}
+.hero-b{display:flex;justify-content:space-between;align-items:end;gap:24px}
+.hero-b p{max-width:380px;font-size:15px}
+.down{width:52px;height:52px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;flex:none}
+.hero-r{background:var(--sage);position:relative;overflow:hidden;color:var(--bg);display:flex;align-items:center;padding:48px}
+.hero-r h2{font-family:"Be Vietnam Pro";font-weight:600;font-size:clamp(38px,5vw,70px);line-height:1;position:relative;z-index:2}
+.hero-r svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* sections */
+section{padding:110px 0;border-bottom:1px solid var(--line)}
+.lead{font-family:"Playfair Display",serif;font-size:clamp(26px,3.4vw,44px);line-height:1.25;max-width:900px}
+.lead em{color:var(--sage-d)}
+.sub{max-width:620px;margin-top:28px;color:#55524b}
+h3.title{font-size:12px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:48px}
+
+.svc{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink)}
+.svc>div{padding:28px 24px 36px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:18px;transition:.25s}
+.svc>div:last-child{border-right:0}
+.svc>div:hover{background:var(--card)}
+.svc b{font-family:"Playfair Display",serif;font-weight:500;font-size:26px;line-height:1.15}
+.svc p{font-size:14px;color:#55524b}
+.svc i{font-style:normal;font-size:12px;color:var(--muted)}
+
+.band{background:var(--ink);color:var(--bg);padding:90px 0 0;border:0}
+.band h2{font-family:"Playfair Display",serif;font-weight:500;font-size:clamp(30px,5vw,68px);line-height:1.1;max-width:1000px}
+.marquee{margin-top:80px;border-top:1px solid #4a4842;overflow:hidden;white-space:nowrap;padding:22px 0;font-size:14px;letter-spacing:.3em}
+.marquee span{display:inline-block;animation:mq 28s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{aspect-ratio:3/4;border-radius:4px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.card svg{position:absolute;inset:0;width:100%;height:100%}
+.card *{position:relative}
+.card .k{font-size:11px;letter-spacing:.2em}
+.card b{font-family:"Playfair Display",serif;font-weight:500;font-size:28px;line-height:1.1}
+.card small{font-size:12px;opacity:.85}
+.c1{background:var(--sun)} .c2{background:var(--clay);color:var(--bg)} .c3{background:var(--card)} .c4{background:var(--sage-d);color:var(--bg)}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.about p{margin-bottom:18px;color:#55524b}
+.about .sig{font-family:"Playfair Display",serif;font-style:italic;font-size:24px;color:var(--ink)}
+.facts{border-top:1px solid var(--ink)}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-size:14px}
+.facts span:first-child{color:var(--muted)}
+blockquote{font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(22px,2.6vw,32px);line-height:1.35;margin-top:40px}
+
+.contact{text-align:left}
+.contact h2{font-family:"Playfair Display",serif;font-weight:500;font-size:clamp(52px,9vw,130px);line-height:.95;margin:28px 0 56px}
+.contact h2 em{color:var(--sage)}
+.rows a{display:flex;justify-content:space-between;padding:22px 0;border-top:1px solid var(--line);font-size:clamp(16px,2vw,22px);transition:.2s}
+.rows a:last-child{border-bottom:1px solid var(--line)}
+.rows a:hover{padding-left:12px;color:var(--sage-d)}
+footer{padding:28px 0;font-size:12px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between}
+
+@media (max-width:900px){
+  .links a:not(.btn){display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-l{padding:32px 16px}
+  .hero-r{min-height:360px;padding:32px 16px}
+  .wrap{padding:0 16px}
+  section{padding:72px 0}
+  .svc{grid-template-columns:1fr 1fr}
+  .svc>div:nth-child(2){border-right:0}
+  .cards{grid-template-columns:1fr 1fr}
+  .about{grid-template-columns:1fr;gap:32px}
+}
+@media (max-width:520px){
+  .svc,.cards{grid-template-columns:1fr}
+  .svc>div{border-right:0;border-bottom:1px solid var(--line)}
+  .card{aspect-ratio:4/3}
+  footer .wrap{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="#">ngọc thanh<span>.</span></a>
+  <div class="links">
+    <a href="#lop-hoc">Lớp học</a>
+    <a href="#ve-minh">Về mình</a>
+    <a class="btn" href="#lien-he">Đăng ký ↗</a>
+  </div>
+</div></nav>
+
+<header class="hero">
+  <div class="hero-l">
+    <div class="hero-top"><span class="mono">TP. Hồ Chí Minh · Việt Nam</span><span class="mono">Yoga online</span></div>
+    <div>
+      <p class="mono" style="margin-bottom:22px">Giáo viên Yoga / Hatha · Trị liệu · Thiền</p>
+      <h1>Thở chậm lại,<span class="in"><em>cơ thể</em></span>sẽ lắng nghe.</h1>
+    </div>
+    <div class="hero-b">
+      <p>Mình dạy yoga online cho người mới bắt đầu. Tập ngay tại nhà, từng động tác đều được hướng dẫn rõ ràng.</p>
+      <a class="down" href="#gioi-thieu" aria-label="Xem tiếp">↓</a>
+    </div>
+  </div>
+  <div class="hero-r">
+    <svg viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <circle cx="290" cy="170" r="78" fill="#e9b949"/>
+      <path d="M60 600 V330 a140 140 0 0 1 280 0 V600" fill="none" stroke="#f3eee6" stroke-width="2" opacity=".6"/>
+      <path d="M110 600 V350 a90 90 0 0 1 180 0 V600" fill="none" stroke="#f3eee6" stroke-width="2" opacity=".35"/>
+      <g stroke="#2b2a26" stroke-width="2.5" stroke-linecap="round"><line x1="70" y1="90" x2="130" y2="90"/><line x1="100" y1="60" x2="100" y2="120"/><line x1="79" y1="69" x2="121" y2="111"/><line x1="121" y1="69" x2="79" y2="111"/></g>
+    </svg>
+    <h2>BREATHE<br>MOVE<br>REST</h2>
+  </div>
+</header>
+
+<section id="gioi-thieu"><div class="wrap">
+  <p class="num">( 01 )</p>
+  <p class="lead">Yoga không cần dẻo mới bắt đầu. Mình là Ngọc Thanh, người giúp bạn <em>tập đúng từ buổi đầu tiên</em>, nhẹ nhàng và đều đặn.</p>
+  <p class="sub">Lớp học dành cho người chưa từng tập, người ngồi văn phòng nhiều, hay người muốn có vài phút yên tĩnh mỗi ngày. Mỗi buổi đều bắt đầu bằng hơi thở.</p>
+</div></section>
+
+<section id="lop-hoc"><div class="wrap">
+  <p class="num">( 02 )</p>
+  <h3 class="title">Mình hướng dẫn</h3>
+  <div class="svc">
+    <div><i>01</i><b>Hatha<br>Yoga</b><p>Các tư thế nền tảng, tập chậm, giữ đúng tư thế và phối hợp với hơi thở.</p></div>
+    <div><i>02</i><b>Yoga<br>trị liệu</b><p>Bài tập nhẹ giúp cơ thể thả lỏng, phù hợp người hay mỏi lưng, cổ, vai.</p></div>
+    <div><i>03</i><b>Hướng dẫn<br>hít thở</b><p>Cách thở sâu và đều để bớt căng thẳng, ngủ ngon hơn.</p></div>
+    <div><i>04</i><b>Thiền</b><p>Vài phút tĩnh lặng mỗi ngày, dễ tập, không cần dụng cụ.</p></div>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <p class="num" style="color:#8b877d">( 03 )</p>
+  <h2>Cơ thể nhớ những gì bạn tập đều, không phải những gì bạn tập nhiều.</h2>
+</div>
+<div class="marquee"><span>BREATHE ✳ MOVE ✳ REST ✳ THỞ ✳ TẬP ✳ NGHỈ ✳ BREATHE ✳ MOVE ✳ REST ✳ THỞ ✳ TẬP ✳ NGHỈ ✳&nbsp;</span><span>BREATHE ✳ MOVE ✳ REST ✳ THỞ ✳ TẬP ✳ NGHỈ ✳ BREATHE ✳ MOVE ✳ REST ✳ THỞ ✳ TẬP ✳ NGHỈ ✳&nbsp;</span></div>
+</section>
+
+<section><div class="wrap">
+  <div class="cards">
+    <div class="card c1"><svg viewBox="0 0 300 400" aria-hidden="true"><circle cx="220" cy="300" r="120" fill="#f3eee6" opacity=".35"/></svg><span class="k">01 / ONLINE</span><div><b>Tập tại nhà</b><small>Chỉ cần một tấm thảm</small></div></div>
+    <div class="card c2"><svg viewBox="0 0 300 400" aria-hidden="true"><path d="M40 400 V230 a110 110 0 0 1 220 0 V400" fill="none" stroke="#f3eee6" stroke-width="2" opacity=".5"/></svg><span class="k">02 / BEGINNER</span><div><b>Người mới bắt đầu</b><small>Không cần kinh nghiệm</small></div></div>
+    <div class="card c3"><svg viewBox="0 0 300 400" aria-hidden="true"><circle cx="150" cy="150" r="70" fill="none" stroke="#6f8467" stroke-width="2"/><circle cx="150" cy="150" r="40" fill="none" stroke="#6f8467" stroke-width="2" opacity=".5"/></svg><span class="k">03 / 2 NĂM</span><div><b>Kinh nghiệm dạy online</b><small>Hướng dẫn người mới</small></div></div>
+    <div class="card c4"><svg viewBox="0 0 300 400" aria-hidden="true"><circle cx="230" cy="80" r="40" fill="#e9b949"/></svg><span class="k">04 / 200 GIỜ</span><div><b>Chứng nhận đào tạo</b><small>Thân Khí Thiền</small></div></div>
+  </div>
+</div></section>
+
+<section id="ve-minh"><div class="wrap">
+  <p class="num">( 04 )</p>
+  <h3 class="title">Một chút về mình</h3>
+  <div class="about">
+    <div>
+      <p class="lead" style="font-size:clamp(24px,2.8vw,36px);margin-bottom:28px">Mình là Ngọc Thanh, người tin rằng ai cũng có thể bắt đầu tập yoga.</p>
+      <p>Ban ngày mình làm việc ở TP.HCM, nên mình hiểu cảm giác ngồi cả ngày rồi mỏi lưng, mỏi vai. Yoga là cách mình lấy lại sự cân bằng.</p>
+      <p>Hai năm qua, mình dạy lớp online cho người mới. Mình chú trọng hơi thở và tư thế đúng, tập chậm mà chắc.</p>
+      <p class="sig">Ngọc Thanh ✦</p>
+    </div>
+    <div>
+      <div class="facts">
+        <div><span>Hình thức</span><span>Lớp online</span></div>
+        <div><span>Đối tượng</span><span>Người mới bắt đầu</span></div>
+        <div><span>Kinh nghiệm</span><span>2 năm</span></div>
+        <div><span>Chứng nhận</span><span>200 giờ, Thân Khí Thiền</span></div>
+        <div><span>Khu vực</span><span>TP. Hồ Chí Minh</span></div>
+      </div>
+      <blockquote>“Thở đúng là động tác đầu tiên của mọi bài tập.”</blockquote>
+    </div>
+  </div>
+</div></section>
+
+<section id="lien-he" class="contact" style="border:0"><div class="wrap">
+  <p class="num">( 05 )</p>
+  <p class="mono">Muốn thử một buổi tập?</p>
+  <h2>Cùng bắt đầu <em>nhẹ nhàng.</em></h2>
+  <div class="rows">
+    <a href="https://zalo.me/0901312993" target="_blank" rel="noopener"><span>Zalo / 0901 312 993</span><span>↗</span></a>
+    <a href="tel:0901312993"><span>Gọi cho Ngọc Thanh</span><span>↗</span></a>
+    <a href="mailto:ngocthanhnguyen0310@gmail.com"><span>ngocthanhnguyen0310@gmail.com</span><span>↗</span></a>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>© 2026 Nguyễn Ngọc Thanh</span><span>Yoga online · TP. Hồ Chí Minh</span></div></footer>
+</body>
+</html>
