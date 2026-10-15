@@ -405,10 +405,10 @@ footer .social a:hover svg{fill:#fff}
     var total=pat.reduce(function(a,b){return a+b},0),before=pat.slice(0,i).reduce(function(a,b){return a+b},0);
     core.style.transitionDuration=d+'s';core.style.transform='scale('+scales[i]+')';
     arc.style.transition='stroke-dashoffset '+d+'s linear';arc.style.strokeDashoffset=L-L*(before+d)/total;
-    for(var k=0;k<d;k++)(function(k){later(function(){show(CMD[i][0],d-k,CMD[i][1]);if(k===0)say(VK[i]);else if(k>=3)say(String(d-k))},k*1000)})(k);
+    for(var k=0;k<d;k++)(function(k){later(function(){show(CMD[i][0],d-k,CMD[i][1]);if(k===0)say(VK[i]);else if(k>=2)say(String(d-k))},k*1000)})(k);
     later(function(){step(i+1)},d*1000);
   }
-  go.onclick=function(){if(run){stop();return}run=true;go.textContent='Dừng lại';clear();arc.style.transition='none';arc.style.strokeDashoffset=L;core.style.transitionDuration='1s';core.style.transform='scale(.7)';show('Sẵn sàng','·','ngồi thẳng, thả lỏng vai');say('san-sang');later(function(){ready(3)},1900)};
+  go.onclick=function(){if(run){stop();return}run=true;go.textContent='Dừng lại';clear();arc.style.transition='none';arc.style.strokeDashoffset=L;core.style.transitionDuration='1s';core.style.transform='scale(.7)';show('Sẵn sàng','·','ngồi thẳng, thả lỏng vai');say('san-sang');later(function(){ready(3)},2800)};
 
   // quiz
   var R=[
