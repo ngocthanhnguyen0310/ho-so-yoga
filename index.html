@@ -179,6 +179,9 @@ nav .btn{padding:10px 20px}
 .contact .btn.line{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
 .copy{margin-top:26px;font-size:14px;color:rgba(255,255,255,.7);cursor:pointer;background:none;border:0;font-family:inherit;border-bottom:1px dashed rgba(255,255,255,.4)}
 footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
+.ytbox{position:fixed;left:18px;bottom:76px;z-index:70;width:220px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 14px 40px rgba(58,42,53,.25);border:2px solid rgba(255,255,255,.8);opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;transition:.35s}
+.ytbox.on{opacity:1;transform:none;pointer-events:auto}
+@media (max-width:560px){.ytbox{width:170px;bottom:66px}}
 .music{position:fixed;left:18px;bottom:18px;z-index:70;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:99px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8);box-shadow:0 10px 30px rgba(200,114,141,.2);cursor:pointer;font-family:inherit;font-size:13px;color:var(--ink)}
 .music i{width:34px;height:34px;border-radius:50%;background:linear-gradient(120deg,var(--rose-d),#b27bd0);display:flex;align-items:center;justify-content:center;gap:2px}
 .music i b{width:3px;height:6px;background:#fff;border-radius:2px;transition:height .3s}
@@ -366,6 +369,7 @@ footer .social a:hover svg{fill:#fff}
 </div></section>
 
 <footer>© 2026 Yoga cùng Ms. Thanh · Nguyễn Ngọc Thanh</footer>
+<div class="ytbox" id="ytbox"><div id="yt"></div></div>
 <button class="music" id="music" aria-label="Bật nhạc thư giãn"><i><b></b><b></b><b></b><b></b></i><span id="mlabel">Bật nhạc thư giãn</span></button>
 <div class="toast" id="toast">Đã chép sẵn lời nhắn, bạn chỉ cần dán vào Zalo</div>
 
@@ -413,10 +417,10 @@ footer .social a:hover svg{fill:#fff}
     var total=pat.reduce(function(a,b){return a+b},0),before=pat.slice(0,i).reduce(function(a,b){return a+b},0);
     core.style.transitionDuration=d+'s';core.style.transform='scale('+scales[i]+')';
     arc.style.transition='stroke-dashoffset '+d+'s linear';arc.style.strokeDashoffset=L-L*(before+d)/total;
-    for(var k=0;k<d;k++)(function(k){later(function(){show(CMD[i][0],d-k,CMD[i][1]);if(k===0)say(VK[i]);else if(k>=2)say(String(d-k))},k*1000)})(k);
+    for(var k=0;k<d;k++)(function(k){later(function(){show(CMD[i][0],d-k,CMD[i][1]);if(k===0)say(VK[i]);else if(k>=3)say(String(d-k))},k*1000)})(k);
     later(function(){step(i+1)},d*1000);
   }
-  go.onclick=function(){if(run){stop();return}run=true;go.textContent='Dừng lại';clear();arc.style.transition='none';arc.style.strokeDashoffset=L;core.style.transitionDuration='1s';core.style.transform='scale(.7)';show('Sẵn sàng','·','ngồi thẳng, thả lỏng vai');say('san-sang');later(function(){ready(3)},2800)};
+  go.onclick=function(){if(run){stop();return}run=true;go.textContent='Dừng lại';clear();arc.style.transition='none';arc.style.strokeDashoffset=L;core.style.transitionDuration='1s';core.style.transform='scale(.7)';show('Sẵn sàng','·','ngồi thẳng, thả lỏng vai');say('san-sang');later(function(){ready(3)},1900)};
 
   // quiz
   var R=[
@@ -457,27 +461,14 @@ footer .social a:hover svg{fill:#fff}
   };
   ['social','social2'].forEach(function(id){var box=document.getElementById(id);if(!box)return;Object.keys(SOCIAL).forEach(function(k){if(!SOCIAL[k])return;var a=document.createElement('a');a.href=SOCIAL[k];a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',k);a.innerHTML='<svg viewBox="0 0 24 24">'+ICON[k]+'</svg>';box.appendChild(a)})});
 
-  // nhạc thiền: tự tạo bằng trình duyệt (không cần file nhạc, không lo bản quyền)
+  // nhạc nền: phát video YouTube qua trình phát chính thức (khung nhỏ góc trái)
   (function(){
-    var btn=document.getElementById('music'),lab=document.getElementById('mlabel'),ctx=null,master=null,on=false,loops=[];
-    var notes=[220,261.63,293.66,329.63,392,440,523.25,587.33];
-    function verb(){var len=ctx.sampleRate*4,b=ctx.createBuffer(2,len,ctx.sampleRate);for(var c=0;c<2;c++){var d=b.getChannelData(c);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3)}var v=ctx.createConvolver();v.buffer=b;return v}
-    // nhạc không lời: piano nhẹ rải hợp âm trên nền đàn dây êm
-    var prog=[[261.63,329.63,392,493.88],[220,261.63,329.63,392],[174.61,220,261.63,329.63],[196,246.94,293.66,392]],bar=0;
-    function piano(f,t,v){var g=ctx.createGain(),lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2200;[[1,1],[2,.35],[3,.12]].forEach(function(h){var o=ctx.createOscillator();o.type='sine';o.frequency.value=f*h[0];var hg=ctx.createGain();hg.gain.value=h[1];o.connect(hg);hg.connect(g);o.start(t);o.stop(t+4.5)});g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.015);g.gain.exponentialRampToValueAtTime(v*.35,t+.6);g.gain.exponentialRampToValueAtTime(.0001,t+4.4);g.connect(lp);lp.connect(master)}
-    function strings(ch,t){ch.forEach(function(f){var o=ctx.createOscillator(),g=ctx.createGain(),lp=ctx.createBiquadFilter();o.type='triangle';o.frequency.value=f/2;o.detune.value=Math.random()*10-5;lp.type='lowpass';lp.frequency.value=700;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.025,t+2.5);g.gain.linearRampToValueAtTime(.02,t+6);g.gain.linearRampToValueAtTime(0,t+8.5);o.connect(lp);lp.connect(g);g.connect(master);o.start(t);o.stop(t+9)})}
-    function playBar(){var t=ctx.currentTime+.05,ch=prog[bar%4],beat=1;strings(ch,t);piano(ch[0]/2,t,.09);
-      var seq=[0,1,2,3,2,1,2,3];seq.forEach(function(n,i){piano(ch[n]*(i>3&&Math.random()<.3?2:1),t+i*beat,.05+Math.random()*.02)});
-      if(Math.random()<.6){var mel=[523.25,587.33,659.25,783.99,880];piano(mel[Math.floor(Math.random()*mel.length)],t+Math.floor(Math.random()*6)*beat+.5,.045)}
-      bar++}
-    function pad(){playBar();loops.push(setInterval(playBar,8000))}
-    function bell(){}
-    function start(){if(!ctx){ctx=new(window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();var v=verb(),dry=ctx.createGain(),wet=ctx.createGain();dry.gain.value=.5;wet.gain.value=.8;master.connect(dry);master.connect(v);v.connect(wet);dry.connect(ctx.destination);wet.connect(ctx.destination)}
-      ctx.resume();master.gain.cancelScheduledValues(ctx.currentTime);master.gain.setValueAtTime(0,ctx.currentTime);master.gain.linearRampToValueAtTime(.9,ctx.currentTime+3);pad();bell()}
-    function stopM(){loops.forEach(function(x){clearInterval(x);clearTimeout(x)});loops=[];if(ctx){master.gain.cancelScheduledValues(ctx.currentTime);master.gain.setValueAtTime(master.gain.value,ctx.currentTime);master.gain.linearRampToValueAtTime(0,ctx.currentTime+1.5)}}
-    btn.onclick=function(){on=!on;btn.classList.toggle('on',on);lab.textContent=on?'Tắt nhạc':'Bật nhạc thư giãn';on?start():stopM()};
-    window._musicOn=function(){if(!on)btn.click()};
+    var btn=document.getElementById('music'),lab=document.getElementById('mlabel'),box=document.getElementById('ytbox'),on=false,player=null,ready=false,want=false;
+    window.onYouTubeIframeAPIReady=function(){player=new YT.Player('yt',{width:'100%',height:'100%',videoId:'44zl0BIi9A0',playerVars:{start:7,controls:1,rel:0,playsinline:1,modestbranding:1},events:{onReady:function(){ready=true;player.setVolume(35);if(want)player.playVideo()},onStateChange:function(e){if(e.data===0){player.seekTo(7);player.playVideo()}}}})};
+    function load(){if(window.YT||document.getElementById('ytapi'))return;var s=document.createElement('script');s.id='ytapi';s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s)}
+    btn.onclick=function(){on=!on;btn.classList.toggle('on',on);box.classList.toggle('on',on);lab.textContent=on?'Tắt nhạc':'Bật nhạc thư giãn';want=on;if(on){load();if(ready)player.playVideo()}else if(ready)player.pauseVideo()};
   })();
+
   // nút Zalo: chép sẵn lời nhắn rồi mở Zalo
   var t=document.getElementById('toast');
   document.querySelectorAll('.zl').forEach(function(a){a.addEventListener('click',function(){try{navigator.clipboard.writeText(a.dataset.msg)}catch(e){}t.classList.add('on');setTimeout(function(){t.classList.remove('on')},3000)})});
