@@ -179,9 +179,6 @@ nav .btn{padding:10px 20px}
 .contact .btn.line{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
 .copy{margin-top:26px;font-size:14px;color:rgba(255,255,255,.7);cursor:pointer;background:none;border:0;font-family:inherit;border-bottom:1px dashed rgba(255,255,255,.4)}
 footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
-.ytbox{position:fixed;left:18px;bottom:76px;z-index:70;width:220px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 14px 40px rgba(58,42,53,.25);border:2px solid rgba(255,255,255,.8);opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;transition:.35s}
-.ytbox.on{opacity:1;transform:none;pointer-events:auto}
-@media (max-width:560px){.ytbox{width:170px;bottom:66px}}
 .music{position:fixed;left:18px;bottom:18px;z-index:70;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:99px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8);box-shadow:0 10px 30px rgba(200,114,141,.2);cursor:pointer;font-family:inherit;font-size:13px;color:var(--ink)}
 .music i{width:34px;height:34px;border-radius:50%;background:linear-gradient(120deg,var(--rose-d),#b27bd0);display:flex;align-items:center;justify-content:center;gap:2px}
 .music i b{width:3px;height:6px;background:#fff;border-radius:2px;transition:height .3s}
@@ -369,7 +366,6 @@ footer .social a:hover svg{fill:#fff}
 </div></section>
 
 <footer>© 2026 Yoga cùng Ms. Thanh · Nguyễn Ngọc Thanh</footer>
-<div class="ytbox" id="ytbox"><div id="yt"></div></div>
 <button class="music" id="music" aria-label="Bật nhạc thư giãn"><i><b></b><b></b><b></b><b></b></i><span id="mlabel">Bật nhạc thư giãn</span></button>
 <div class="toast" id="toast">Đã chép sẵn lời nhắn, bạn chỉ cần dán vào Zalo</div>
 
@@ -461,12 +457,12 @@ footer .social a:hover svg{fill:#fff}
   };
   ['social','social2'].forEach(function(id){var box=document.getElementById(id);if(!box)return;Object.keys(SOCIAL).forEach(function(k){if(!SOCIAL[k])return;var a=document.createElement('a');a.href=SOCIAL[k];a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',k);a.innerHTML='<svg viewBox="0 0 24 24">'+ICON[k]+'</svg>';box.appendChild(a)})});
 
-  // nhạc nền: phát video YouTube qua trình phát chính thức (khung nhỏ góc trái)
+  // nhạc nền: "Sleep Music No. 1" (Chris Haugen) - thư viện âm thanh YouTube Studio
   (function(){
-    var btn=document.getElementById('music'),lab=document.getElementById('mlabel'),box=document.getElementById('ytbox'),on=false,player=null,ready=false,want=false;
-    window.onYouTubeIframeAPIReady=function(){player=new YT.Player('yt',{width:'100%',height:'100%',videoId:'44zl0BIi9A0',playerVars:{start:7,controls:1,rel:0,playsinline:1,modestbranding:1},events:{onReady:function(){ready=true;player.setVolume(35);if(want)player.playVideo()},onStateChange:function(e){if(e.data===0){player.seekTo(7);player.playVideo()}}}})};
-    function load(){if(window.YT||document.getElementById('ytapi'))return;var s=document.createElement('script');s.id='ytapi';s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s)}
-    btn.onclick=function(){on=!on;btn.classList.toggle('on',on);box.classList.toggle('on',on);lab.textContent=on?'Tắt nhạc':'Bật nhạc thư giãn';want=on;if(on){load();if(ready)player.playVideo()}else if(ready)player.pauseVideo()};
+    var btn=document.getElementById('music'),lab=document.getElementById('mlabel'),on=false,fade=null;
+    var au=new Audio('music/sleep-music-no1.mp3');au.loop=true;au.preload='none';au.volume=0;
+    function ramp(to,ms,done){clearInterval(fade);var st=au.volume,n=0,steps=30;fade=setInterval(function(){n++;au.volume=Math.max(0,Math.min(1,st+(to-st)*n/steps));if(n>=steps){clearInterval(fade);if(done)done()}},ms/steps)}
+    btn.onclick=function(){on=!on;btn.classList.toggle('on',on);lab.textContent=on?'Tắt nhạc':'Bật nhạc thư giãn';if(on){au.play().catch(function(){});ramp(.35,2500)}else ramp(0,1200,function(){au.pause()})};
   })();
 
   // nút Zalo: chép sẵn lời nhắn rồi mở Zalo
