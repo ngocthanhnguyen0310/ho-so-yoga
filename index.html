@@ -109,6 +109,9 @@ nav .btn{padding:10px 20px}
 .modes{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 26px}
 .mode{padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--glass);font-size:13px;cursor:pointer;font-family:inherit;color:var(--ink);transition:.25s}
 .mode.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bw .core small{display:block;font-size:13px;color:var(--soft);margin-top:6px;letter-spacing:.04em}
+.bw .core span.pop{animation:pop .5s ease}
+@keyframes pop{from{transform:scale(1.35);opacity:.3}}
 .cycles{font-size:13px;color:var(--soft);margin-top:14px}
 
 /* classes: tilt cards */
@@ -265,12 +268,12 @@ footer .social a:hover svg{fill:#fff}
   <div class="bw rv">
     <div class="halo"></div>
     <svg viewBox="0 0 420 420"><circle id="arc" cx="210" cy="210" r="200"/></svg>
-    <div class="core" id="core"><div><b id="phase">Sẵn sàng</b><span id="num">·</span></div></div>
+    <div class="core" id="core"><div><b id="phase">Sẵn sàng</b><span id="num">·</span><small id="hint">bấm nút để bắt đầu</small></div></div>
   </div>
   <div class="rv">
     <span class="tag">Thở cùng mình</span>
     <h2>Một phút <em>dành cho bạn.</em></h2>
-    <p style="color:var(--soft);max-width:440px">Chọn một nhịp thở rồi bấm bắt đầu. Nhìn vòng tròn nở ra khi hít vào, thu lại khi thở ra.</p>
+    <p style="color:var(--soft);max-width:440px">Chọn một nhịp thở rồi bấm bắt đầu. Sau 3 giây chuẩn bị, bạn làm theo khẩu lệnh và số đếm trong vòng tròn.</p>
     <div class="modes" id="modes">
       <button class="mode on" data-p="4,4,4,4">Thở hộp 4-4-4-4</button>
       <button class="mode" data-p="4,0,6,0">Thư giãn 4-6</button>
@@ -378,24 +381,27 @@ footer .social a:hover svg{fill:#fff}
     c.addEventListener('pointerleave',function(){c.style.transform=''});
   });
 
-  // breathing studio
-  var core=document.getElementById('core'),ph=document.getElementById('phase'),num=document.getElementById('num'),arc=document.getElementById('arc'),go=document.getElementById('go'),cyc=document.getElementById('cyc');
-  var pat=[4,4,4,4],run=false,timer=null,count=0,L=1257;
+  // breathing studio: Sẵn sàng 3-2-1, rồi khẩu lệnh + đếm ngược từng giây
+  var core=document.getElementById('core'),phase=document.getElementById('phase'),num=document.getElementById('num'),hint=document.getElementById('hint'),arc=document.getElementById('arc'),go=document.getElementById('go'),cyc=document.getElementById('cyc');
+  var pat=[4,4,4,4],run=false,timers=[],count=0,L=1257;
+  var CMD=[['Hít vào','từ từ bằng mũi'],['Giữ hơi','thả lỏng vai'],['Thở ra','chậm qua miệng'],['Nghỉ','giữ yên']],scales=[1,1,.7,.7];
   document.querySelectorAll('.mode').forEach(function(b){b.onclick=function(){document.querySelectorAll('.mode').forEach(function(x){x.classList.remove('on')});b.classList.add('on');pat=b.dataset.p.split(',').map(Number);if(run)stop()}});
-  var names=['Hít vào','Giữ hơi','Thở ra','Nghỉ'],scales=[1,1,.7,.7];
-  function stop(){run=false;clearTimeout(timer);clearInterval(window._tick);go.textContent='Bắt đầu thở';ph.textContent='Sẵn sàng';num.textContent='·';core.style.transitionDuration='1.2s';core.style.transform='scale(.7)';arc.style.transition='stroke-dashoffset .6s';arc.style.strokeDashoffset=L}
+  function later(f,ms){timers.push(setTimeout(f,ms))}
+  function clear(){timers.forEach(clearTimeout);timers=[]}
+  function show(t,n,h){phase.textContent=t;num.textContent=n;hint.textContent=h||'';num.classList.remove('pop');void num.offsetWidth;num.classList.add('pop')}
+  function stop(){run=false;clear();go.textContent='Bắt đầu thở';show('Sẵn sàng','·','bấm nút để bắt đầu');core.style.transitionDuration='1.2s';core.style.transform='scale(.7)';arc.style.transition='stroke-dashoffset .6s';arc.style.strokeDashoffset=L}
+  function ready(n){if(!run)return;if(n===0)return step(0);show('Sẵn sàng',n,'ngồi thẳng, thả lỏng vai');later(function(){ready(n-1)},1000)}
   function step(i){
     if(!run)return;
-    if(i>3){count++;cyc.textContent='Bạn đã hoàn thành '+count+' vòng thở.';i=0}
-    var d=pat[i];if(!d){return step(i+1)}
-    ph.textContent=names[i];core.style.transitionDuration=d+'s';core.style.transform='scale('+scales[i]+')';
+    if(i>3){count++;cyc.textContent='Bạn đã hoàn thành '+count+' vòng thở.';arc.style.transition='none';arc.style.strokeDashoffset=L;arc.getBoundingClientRect();i=0}
+    var d=pat[i];if(!d)return step(i+1);
     var total=pat.reduce(function(a,b){return a+b},0),before=pat.slice(0,i).reduce(function(a,b){return a+b},0);
+    core.style.transitionDuration=d+'s';core.style.transform='scale('+scales[i]+')';
     arc.style.transition='stroke-dashoffset '+d+'s linear';arc.style.strokeDashoffset=L-L*(before+d)/total;
-    var left=d;num.textContent=left;clearInterval(window._tick);
-    window._tick=setInterval(function(){left--;if(left>0)num.textContent=left},1000);
-    timer=setTimeout(function(){if(i===3||(i===2&&!pat[3])){arc.style.transition='none';arc.style.strokeDashoffset=L;arc.getBoundingClientRect()}step(i+1)},d*1000);
+    for(var k=0;k<d;k++)(function(k){later(function(){show(CMD[i][0],d-k,CMD[i][1])},k*1000)})(k);
+    later(function(){step(i+1)},d*1000);
   }
-  go.onclick=function(){if(run){stop();return}run=true;go.textContent='Dừng lại';arc.style.transition='none';arc.style.strokeDashoffset=L;step(0)};
+  go.onclick=function(){if(run){stop();return}run=true;go.textContent='Dừng lại';clear();arc.style.transition='none';arc.style.strokeDashoffset=L;core.style.transitionDuration='1s';core.style.transform='scale(.7)';ready(3)};
 
   // quiz
   var R=[
