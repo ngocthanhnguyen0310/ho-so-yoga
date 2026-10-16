@@ -198,6 +198,27 @@ footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
 .dl .dem b{color:var(--rose-d);font-size:18px}
 .dl .ok{text-align:center;padding:10px 0}
 .dl .ok i{display:grid;place-items:center;width:70px;height:70px;margin:0 auto 10px;border-radius:50%;background:linear-gradient(120deg,var(--rose-d),#b27bd0);color:#fff;font-style:normal;font-size:34px}
+/* ô chat hỏi Ms. Thanh */
+.cb-nut{position:fixed;right:18px;bottom:18px;z-index:80;display:flex;align-items:center;gap:10px;padding:12px 18px 12px 14px;border-radius:99px;border:0;cursor:pointer;font:500 14px "Be Vietnam Pro",sans-serif;color:#fff;background:linear-gradient(120deg,var(--rose-d),#b27bd0);box-shadow:0 14px 34px rgba(200,114,141,.4)}
+.cb-nut svg{width:22px;height:22px;fill:#fff}
+.cb{position:fixed;right:18px;bottom:84px;z-index:85;width:min(370px,calc(100vw - 32px));height:min(520px,calc(100vh - 120px));display:flex;flex-direction:column;background:#fffaf8;border-radius:24px;box-shadow:0 30px 80px rgba(58,42,53,.3);overflow:hidden;opacity:0;transform:translateY(16px) scale(.97);pointer-events:none;transition:.3s}
+.cb.on{opacity:1;transform:none;pointer-events:auto}
+.cb-dau{padding:14px 18px;background:linear-gradient(120deg,var(--rose-d),#b27bd0);color:#fff}
+.cb-dau b{display:block;font-family:"Cormorant Garamond",serif;font-weight:500;font-size:22px}
+.cb-dau small{opacity:.85;font-size:12px}
+.cb-ds{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.cb-tin{max-width:85%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.55;white-space:pre-wrap}
+.cb-tin.ai{background:#fff;border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:6px}
+.cb-tin.kh{background:var(--ink);color:#fff;align-self:flex-end;border-bottom-right-radius:6px}
+.cb-tin .btn{margin-top:8px;padding:8px 14px;font-size:13px}
+.cb-goi{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 8px}
+.cb-goi button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font:inherit;font-size:12px;cursor:pointer;color:var(--ink)}
+.cb-o{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#fff}
+.cb-o input{flex:1;border:1px solid var(--line);border-radius:99px;padding:10px 14px;font:inherit;font-size:14px}
+.cb-o button{border:0;border-radius:50%;width:42px;height:42px;background:var(--rose-d);color:#fff;font-size:18px;cursor:pointer}
+.cb-o button:disabled{opacity:.5}
+.cb-chu{font-size:11px;color:var(--soft);text-align:center;padding:0 10px 8px;background:#fff}
+@media (max-width:560px){.cb-nut span{display:none}.cb-nut{padding:14px}}
 .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);padding:12px 22px;border-radius:99px;background:var(--ink);color:#fff;font-size:14px;transition:.4s;z-index:60}
 .toast.on{transform:translate(-50%,0)}
 
@@ -405,6 +426,15 @@ footer .social a:hover svg{fill:#fff}
   <div id="b4" hidden><div class="ok"><h3>Đơn đã hết thời gian giữ chỗ</h3><p style="color:var(--soft)">Nếu bạn đã chuyển khoản, nhắn Zalo cho Ms. Thanh kèm mã đơn để được hỗ trợ.</p><button class="btn" type="button" id="dlai">Đặt lại</button></div></div>
 </div></div>
 
+<button class="cb-nut" id="cbNut" aria-label="Hỏi Ms. Thanh"><svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.4 1.2 4.6 3.1 6.1L4 21l4-1.9c1.2.4 2.6.6 4 .6 5.5 0 10-3.8 10-8.2S17.5 3 12 3z"/></svg><span>Hỏi Ms. Thanh</span></button>
+<div class="cb" id="cb" role="dialog" aria-label="Hỏi đáp với Yoga cùng Ms. Thanh">
+  <div class="cb-dau"><b>Hỏi Ms. Thanh</b><small>Trợ lý AI trả lời theo hồ sơ của Ms. Thanh</small></div>
+  <div class="cb-ds" id="cbDs"><div class="cb-tin ai">Chào bạn, mình trả lời các câu hỏi về Ms. Thanh và lớp Yoga online. Bạn muốn biết điều gì?</div></div>
+  <div class="cb-goi" id="cbGoi"><button>Ms. Thanh có kinh nghiệm gì?</button><button>Lớp học diễn ra thế nào?</button><button>Mình mới tập có học được không?</button></div>
+  <form class="cb-o" id="cbF"><input id="cbI" maxlength="300" placeholder="Nhập câu hỏi..." autocomplete="off"><button id="cbB" aria-label="Gửi">➤</button></form>
+  <div class="cb-chu" id="cbChu">AI có thể chưa biết hết. Cần chắc chắn, bạn nhắn Zalo cho Ms. Thanh nhé.</div>
+</div>
+
 <footer><a href="san-pham.html" style="border-bottom:1px solid currentColor">Góc đồ tập Ms. Thanh đang dùng</a><br>© 2026 Yoga cùng Ms. Thanh · Nguyễn Ngọc Thanh</footer>
 <div class="toast" id="toast">Đã chép sẵn lời nhắn, bạn chỉ cần dán vào Zalo</div>
 
@@ -505,6 +535,7 @@ footer .social a:hover svg{fill:#fff}
     function dong(n){return n.toLocaleString('vi-VN').replace(/,/g,'.')+' đồng'}
     function moi(){dl.classList.add('on');dl.setAttribute('aria-hidden','false');if(!sel.dataset.ok)taiGoi()}
     function tat(){dl.classList.remove('on');dl.setAttribute('aria-hidden','true')}
+    window.moDatLich=function(){buoc(1);moi()};
     function taiGoi(){var thu=/[?&]thu=1/.test(location.search);fetch(API+'/yoga/goi').then(function(r){return r.json()}).then(function(j){sel.innerHTML='<option value="">Chọn gói học</option>'+j.goi.filter(function(g){return g.ma!=='thu'||thu}).map(function(g){return '<option value="'+g.ma+'">'+g.ten+': '+dong(g.gia)+'</option>'}).join('');sel.dataset.ok=1}).catch(function(){sel.innerHTML='<option value="">Không tải được, bạn thử lại sau</option>'})}
     var mai=new Date(Date.now()+86400000),ng=document.getElementById('dngay');ng.min=new Date().toISOString().slice(0,10);ng.value=mai.toISOString().slice(0,10);
     document.querySelectorAll('[data-datlich]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();buoc(1);moi()})});
@@ -523,6 +554,30 @@ footer .social a:hover svg{fill:#fff}
       }).catch(function(){nut.disabled=false;nut.textContent='Đặt lịch và thanh toán';loi.textContent='Không kết nối được, bạn thử lại nhé.'})};
     function demNguoc(het){clearInterval(tick);var el=document.getElementById('ddem');tick=setInterval(function(){var s=Math.max(0,Math.round((het-Date.now())/1000));el.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');if(!s)clearInterval(tick)},1000)}
     function theoDoi(ma){clearInterval(poll);poll=setInterval(function(){fetch(API+'/yoga/don?ma='+ma).then(function(r){return r.json()}).then(function(j){if(j.trangThai==='xacnhan'){clearInterval(poll);clearInterval(tick);buoc(3)}else if(j.trangThai==='huy'){clearInterval(poll);clearInterval(tick);buoc(4)}}).catch(function(){})},8000)}
+  })();
+
+  // ô chat hỏi Ms. Thanh
+  (function(){
+    var API='https://bot-tro-ly-thanh.thanh-pulppy.workers.dev';
+    var cb=document.getElementById('cb'),ds=document.getElementById('cbDs'),f=document.getElementById('cbF'),i=document.getElementById('cbI'),bt=document.getElementById('cbB'),chu=document.getElementById('cbChu'),lichSu=[];
+    document.getElementById('cbNut').onclick=function(){cb.classList.toggle('on');if(cb.classList.contains('on'))setTimeout(function(){i.focus()},300)};
+    function them(vai,noi,datLich){var d=document.createElement('div');d.className='cb-tin '+(vai==='khach'?'kh':'ai');d.textContent=noi;if(datLich){var a=document.createElement('button');a.className='btn';a.type='button';a.textContent='Đặt lịch học';a.onclick=function(){cb.classList.remove('on');window.moDatLich&&window.moDatLich()};d.appendChild(document.createElement('br'));d.appendChild(a)}ds.appendChild(d);ds.scrollTop=ds.scrollHeight;return d}
+    function hoi(q){q=q.trim();if(!q)return;document.getElementById('cbGoi').style.display='none';them('khach',q);i.value='';bt.disabled=true;var cho=them('ai','Đang trả lời...');
+      fetch(API+'/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({hoi:q,lichSu:lichSu.slice(-6)})}).then(function(r){return r.json()}).then(function(j){cho.remove();them('ai',j.tl||j.loi||'Có lỗi, bạn thử lại nhé.',j.datLich);lichSu.push({vai:'khach',noi:q},{vai:'ai',noi:j.tl||''});if(typeof j.conLai==='number')chu.textContent='Bạn còn '+j.conLai+' câu hỏi hôm nay. AI có thể chưa biết hết, cần chắc chắn bạn nhắn Zalo cho Ms. Thanh.';bt.disabled=false;i.focus()}).catch(function(){cho.textContent='Không kết nối được, bạn thử lại sau nhé.';bt.disabled=false})}
+    f.onsubmit=function(e){e.preventDefault();hoi(i.value)};
+    document.querySelectorAll('#cbGoi button').forEach(function(b){b.onclick=function(){hoi(b.textContent)}});
+  })();
+
+  // nội dung sống: gói, lớp, câu hỏi thường gặp do Ms. Thanh sửa qua Telegram
+  (function(){
+    var API='https://bot-tro-ly-thanh.thanh-pulppy.workers.dev';
+    function e(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+    fetch(API+'/web/noidung').then(function(r){return r.json()}).then(function(n){
+      var cards=[].slice.call(document.querySelectorAll('.cards .card'));
+      if(n.lop&&n.lop.length&&cards.length){var mau=cards[0].parentNode;n.lop.forEach(function(l,k){var c=cards[k];if(!c){c=cards[k%cards.length].cloneNode(true);c.classList.add('on');mau.appendChild(c)}c.querySelector('h3').textContent=l.ten;c.querySelector('p').textContent=l.moTa});for(var k=n.lop.length;k<cards.length;k++)cards[k].remove()}
+      var fq=document.getElementById('faq');
+      if(n.faq&&fq){fq.innerHTML=n.faq.map(function(x){return '<div class="q"><button>'+e(x.hoi)+'<span>+</span></button><div class="a"><div><p>'+e(x.dap)+'</p></div></div></div>'}).join('');fq.querySelectorAll('.q button').forEach(function(b){b.onclick=function(){var q=b.parentNode,on=q.classList.contains('on');fq.querySelectorAll('.q').forEach(function(x){x.classList.remove('on')});if(!on)q.classList.add('on')}})}
+    }).catch(function(){});
   })();
 
   // nút Zalo: chép sẵn lời nhắn rồi mở Zalo
