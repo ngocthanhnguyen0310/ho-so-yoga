@@ -179,6 +179,25 @@ nav .btn{padding:10px 20px}
 .contact .btn.line{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
 .copy{margin-top:26px;font-size:14px;color:rgba(255,255,255,.7);cursor:pointer;background:none;border:0;font-family:inherit;border-bottom:1px dashed rgba(255,255,255,.4)}
 footer{text-align:center;padding:36px 0 46px;font-size:13px;color:var(--soft)}
+/* đặt lịch + thanh toán QR */
+.dl{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;background:rgba(40,26,36,.55);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:.3s}
+.dl.on{opacity:1;pointer-events:auto}
+.dl-box{position:relative;width:min(460px,100%);max-height:92vh;overflow:auto;background:#fffaf8;border-radius:28px;padding:30px 24px 26px;box-shadow:0 30px 80px rgba(58,42,53,.35)}
+.dl-box h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:30px;line-height:1.1;margin:6px 0 14px}
+.dl-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:22px;cursor:pointer;color:var(--ink)}
+.dl label{display:block;font-size:13px;color:var(--soft);margin:12px 0 5px}
+.dl input,.dl select,.dl textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:#fff;font:inherit;font-size:15px;color:var(--ink)}
+.dl input:focus,.dl select:focus,.dl textarea:focus{outline:2px solid var(--rose);border-color:transparent}
+.dl .hai{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dl .btn{width:100%;justify-content:center;margin-top:18px}
+.dl .loi{color:#b3261e;font-size:14px;margin-top:10px;min-height:1em}
+.dl .qr{display:block;width:100%;max-width:300px;margin:6px auto 10px;border-radius:16px;border:1px solid var(--line);background:#fff}
+.dl .tt{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:14px;line-height:1.8}
+.dl .tt b{color:var(--ink)}
+.dl .dem{text-align:center;font-size:14px;color:var(--soft);margin:12px 0 0}
+.dl .dem b{color:var(--rose-d);font-size:18px}
+.dl .ok{text-align:center;padding:10px 0}
+.dl .ok i{display:grid;place-items:center;width:70px;height:70px;margin:0 auto 10px;border-radius:50%;background:linear-gradient(120deg,var(--rose-d),#b27bd0);color:#fff;font-style:normal;font-size:34px}
 .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);padding:12px 22px;border-radius:99px;background:var(--ink);color:#fff;font-size:14px;transition:.4s;z-index:60}
 .toast.on{transform:translate(-50%,0)}
 
@@ -237,7 +256,7 @@ footer .social a:hover svg{fill:#fff}
 <nav>
   <a class="logo" href="#">Yoga cùng <b>Ms. Thanh</b></a>
   <div class="menu"><a href="#tho">Thở cùng mình</a><a href="#lop">Lớp học</a><a href="#goi-y">Chọn lớp</a><a href="#ve-minh">Về mình</a></div>
-  <a class="btn" href="#lien-he">Đăng ký</a>
+  <a class="btn" href="#dat-lich" data-datlich>Đăng ký</a>
 </nav>
 
 <header class="w hero">
@@ -351,12 +370,40 @@ footer .social a:hover svg{fill:#fff}
     <p>Mình sẽ gửi bạn lịch học và cách vào lớp.</p>
     <div class="acts">
       <a class="btn line zl" href="https://zalo.me/0901312993" target="_blank" rel="noopener" data-msg="Chào Ms. Thanh, mình muốn được tư vấn lớp học yoga.">Tư vấn lớp học</a>
-      <a class="btn zl" href="https://zalo.me/0901312993" target="_blank" rel="noopener" data-msg="Chào Ms. Thanh, mình muốn đăng ký lớp học yoga.">Đăng ký ngay</a>
+      <a class="btn" href="#dat-lich" data-datlich>Đăng ký ngay</a>
     </div>
     <p class="follow">Theo dõi Yoga cùng Ms. Thanh</p>
     <div class="social" id="social"></div>
   </div>
 </div></section>
+
+<div class="dl" id="dl" aria-hidden="true"><div class="dl-box" role="dialog" aria-labelledby="dlt">
+  <button class="dl-x" id="dlx" aria-label="Đóng">×</button>
+  <div id="b1">
+    <span class="tag">Đặt lịch học</span>
+    <h3 id="dlt">Chọn gói và thời gian bạn muốn học</h3>
+    <form id="fdl">
+      <label for="dgoi">Gói học</label><select id="dgoi" required><option value="">Đang tải...</option></select>
+      <div class="hai"><div><label for="dngay">Ngày muốn học</label><input id="dngay" type="date" required></div><div><label for="dgio">Giờ</label><input id="dgio" type="time" required value="19:00"></div></div>
+      <label for="dten">Họ tên</label><input id="dten" required maxlength="60" autocomplete="name">
+      <label for="dzalo">Số Zalo</label><input id="dzalo" required maxlength="15" inputmode="tel" autocomplete="tel">
+      <label for="demail">Email (để nhận xác nhận)</label><input id="demail" type="email" required maxlength="100" autocomplete="email">
+      <label for="dghi">Ghi chú (không bắt buộc)</label><textarea id="dghi" rows="2" maxlength="300"></textarea>
+      <button class="btn" type="submit" id="dgui">Đặt lịch và thanh toán</button>
+      <p class="loi" id="dloi"></p>
+    </form>
+  </div>
+  <div id="b2" hidden>
+    <span class="tag">Thanh toán</span>
+    <h3>Quét mã để chuyển khoản</h3>
+    <img class="qr" id="dqr" alt="Mã QR chuyển khoản">
+    <div class="tt" id="dtt"></div>
+    <p class="dem">Giữ chỗ cho bạn trong <b id="ddem">30:00</b></p>
+    <p class="dem" style="font-size:13px">Ms. Thanh kiểm tra tiền về và xác nhận, bạn sẽ nhận email. Bạn có thể đóng trang này.</p>
+  </div>
+  <div id="b3" hidden><div class="ok"><i>✓</i><h3>Đã xác nhận lịch học</h3><p style="color:var(--soft)">Ms. Thanh đã nhận học phí. Email xác nhận đã gửi tới bạn.</p></div></div>
+  <div id="b4" hidden><div class="ok"><h3>Đơn đã hết thời gian giữ chỗ</h3><p style="color:var(--soft)">Nếu bạn đã chuyển khoản, nhắn Zalo cho Ms. Thanh kèm mã đơn để được hỗ trợ.</p><button class="btn" type="button" id="dlai">Đặt lại</button></div></div>
+</div></div>
 
 <footer>© 2026 Yoga cùng Ms. Thanh · Nguyễn Ngọc Thanh</footer>
 <div class="toast" id="toast">Đã chép sẵn lời nhắn, bạn chỉ cần dán vào Zalo</div>
@@ -448,6 +495,35 @@ footer .social a:hover svg{fill:#fff}
     zalo:'<path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.6 1.4 4.9 3.6 6.5L5 21l3.4-1.7c1.1.4 2.3.6 3.6.6 5.5 0 10-3.8 10-8.4S17.5 3 12 3zm-3.9 10.9H5.4v-.6l2.1-2.9H5.6v-.9h2.6v.6l-2.1 2.9h2v.9zm2.7 0h-.9V9.5h.9v4.4zm4.1 0h-1.2l-1.5-2.1v2.1h-.9V9.5h.9v2l1.4-2h1.1l-1.6 2.1 1.8 2.3zm3.9-1.6c0 1-.8 1.7-1.7 1.7s-1.7-.8-1.7-1.7.8-1.7 1.7-1.7 1.7.7 1.7 1.7zm-.9 0c0-.5-.4-.9-.8-.9s-.8.4-.8.9.4.9.8.9.8-.4.8-.9z"/>'
   };
   ['social','social2'].forEach(function(id){var box=document.getElementById(id);if(!box)return;Object.keys(SOCIAL).forEach(function(k){if(!SOCIAL[k])return;var a=document.createElement('a');a.href=SOCIAL[k];a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',k);a.innerHTML='<svg viewBox="0 0 24 24">'+ICON[k]+'</svg>';box.appendChild(a)})});
+
+  // đặt lịch + thanh toán QR (máy chủ: bot Cloudflare của Ms. Thanh)
+  (function(){
+    var API='https://bot-tro-ly-thanh.thanh-pulppy.workers.dev';
+    var dl=document.getElementById('dl'),f=document.getElementById('fdl'),sel=document.getElementById('dgoi'),loi=document.getElementById('dloi'),nut=document.getElementById('dgui');
+    var b=[1,2,3,4].map(function(i){return document.getElementById('b'+i)}),poll=null,tick=null;
+    function buoc(n){b.forEach(function(x,i){x.hidden=i!==n-1})}
+    function dong(n){return n.toLocaleString('vi-VN').replace(/,/g,'.')+' đồng'}
+    function moi(){dl.classList.add('on');dl.setAttribute('aria-hidden','false');if(!sel.dataset.ok)taiGoi()}
+    function tat(){dl.classList.remove('on');dl.setAttribute('aria-hidden','true')}
+    function taiGoi(){var thu=/[?&]thu=1/.test(location.search);fetch(API+'/yoga/goi').then(function(r){return r.json()}).then(function(j){sel.innerHTML='<option value="">Chọn gói học</option>'+j.goi.filter(function(g){return g.ma!=='thu'||thu}).map(function(g){return '<option value="'+g.ma+'">'+g.ten+': '+dong(g.gia)+'</option>'}).join('');sel.dataset.ok=1}).catch(function(){sel.innerHTML='<option value="">Không tải được, bạn thử lại sau</option>'})}
+    var mai=new Date(Date.now()+86400000),ng=document.getElementById('dngay');ng.min=new Date().toISOString().slice(0,10);ng.value=mai.toISOString().slice(0,10);
+    document.querySelectorAll('[data-datlich]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();buoc(1);moi()})});
+    document.getElementById('dlx').onclick=tat;dl.onclick=function(e){if(e.target===dl)tat()};
+    document.getElementById('dlai').onclick=function(){buoc(1)};
+    if(/[?&]thu=1/.test(location.search)||location.hash==='#dat-lich')setTimeout(function(){buoc(1);moi()},600);
+    f.onsubmit=function(e){e.preventDefault();loi.textContent='';nut.disabled=true;nut.textContent='Đang tạo đơn...';
+      var v=function(id){return document.getElementById(id).value.trim()};
+      fetch(API+'/yoga/dat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({goi:v('dgoi'),ngay:v('dngay'),gio:v('dgio'),ten:v('dten'),zalo:v('dzalo'),email:v('demail'),ghiChu:v('dghi')})})
+      .then(function(r){return r.json()}).then(function(j){
+        nut.disabled=false;nut.textContent='Đặt lịch và thanh toán';
+        if(!j.ma){loi.textContent=j.loi||'Có lỗi, bạn thử lại nhé.';return}
+        document.getElementById('dqr').src=j.qr;
+        document.getElementById('dtt').innerHTML='Số tiền: <b>'+j.giaChu+'</b><br>Nội dung chuyển khoản: <b>'+j.ma+'</b><br>Ngân hàng: <b>'+j.nganHang.ten+'</b><br>Số tài khoản: <b>'+j.nganHang.stk+'</b><br>Chủ tài khoản: <b>'+j.nganHang.chu+'</b>';
+        buoc(2);demNguoc(j.het);theoDoi(j.ma);
+      }).catch(function(){nut.disabled=false;nut.textContent='Đặt lịch và thanh toán';loi.textContent='Không kết nối được, bạn thử lại nhé.'})};
+    function demNguoc(het){clearInterval(tick);var el=document.getElementById('ddem');tick=setInterval(function(){var s=Math.max(0,Math.round((het-Date.now())/1000));el.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');if(!s)clearInterval(tick)},1000)}
+    function theoDoi(ma){clearInterval(poll);poll=setInterval(function(){fetch(API+'/yoga/don?ma='+ma).then(function(r){return r.json()}).then(function(j){if(j.trangThai==='xacnhan'){clearInterval(poll);clearInterval(tick);buoc(3)}else if(j.trangThai==='huy'){clearInterval(poll);clearInterval(tick);buoc(4)}}).catch(function(){})},8000)}
+  })();
 
   // nút Zalo: chép sẵn lời nhắn rồi mở Zalo
   var t=document.getElementById('toast');
