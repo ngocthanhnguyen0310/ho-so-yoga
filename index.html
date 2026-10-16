@@ -597,5 +597,6 @@ footer .social a:hover svg{fill:#fff}
   document.querySelectorAll('.zl').forEach(function(a){a.addEventListener('click',function(){try{navigator.clipboard.writeText(a.dataset.msg)}catch(e){}t.classList.add('on');setTimeout(function(){t.classList.remove('on')},3000)})});
 })();
 </script>
+<script>(function(){try{if(sessionStorage.getItem('xem-chinh'))return;sessionStorage.setItem('xem-chinh','1')}catch(e){}fetch('https://bot-tro-ly-thanh.thanh-pulppy.workers.dev/web/xem?p=chinh',{mode:'no-cors',keepalive:true}).catch(function(){})})();</script>
 </body>
 </html>
